@@ -1,11 +1,11 @@
 export const theme = {
     primary:{
-        normal: '#274abc',
-        light: '#3d5cc3',
-        deep: '#0c183c',
-        dark: '#08112a',
-        darker:'#050a18',
-        black:'#151515'
+        normal: '#003ec9',
+        light: '#0247db',
+        deep: '#022879',
+        dark: '#1d1c1c',
+        darker:'#131212',
+        black:'#070707'
     },
     gray:{
         white:'#fff',

@@ -1,18 +1,38 @@
-import { View, Text , StyleSheet ,Image , ImageBackground, TouchableOpacity} from 'react-native'
+import { View, Text , Image , StyleSheet} from 'react-native'
 import React from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
+<<<<<<< HEAD
 import { theme } from '@/constants/theme'
 
 import { vh, vw } from '@/helpers/responsivesizes'
+=======
+import { vw } from '@/helpers/responsivesizes'
+import CustomText from '@/components/typography/text'
+import CustomButton from '@/components/ui/button'
+>>>>>>> abca2d1 (change app)
 import { router } from 'expo-router'
-
-
-
 
 const index = () => {
   return (
-    <ScreenWrapper SafeArea={false} Style={style.wrapper}>
+    <ScreenWrapper SafeArea={false} Style={Style.container}>
+      {/* splash image */}
+      <Image style={Style.image} source={require('../assets/images/splashimg.png')}/>
+
+
+      {/* logo & motto */}
+      <View>
+        <CustomText isCentered isheader text='Budget Boy.'/>
+        <CustomText isCentered isSupporting text='track your expenses seamlessly.'/>
+        <CustomText isCentered isSupporting text='take notes of income vs expenditure.'/>
+      </View>
+
+
+
+      {/* call to action button */}
+      <CustomButton title = {'Get Started' } onPress={()=>{router.push('/register')}}/>
+
       
+<<<<<<< HEAD
       <ImageBackground source={require('../assets/images/backgroundImage.jpg')}>
         <View style={style.page}>
           {/*Bot Image*/ }
@@ -35,38 +55,21 @@ const index = () => {
         </View>
         </ImageBackground>
      
+=======
+>>>>>>> abca2d1 (change app)
     </ScreenWrapper>
   )
 }
 
-const style = StyleSheet.create({
-  wrapper:{
-   backgroundColor: theme.primary.black,
-    position:'relative'
-  },
-  page:{
-    width: vw(100),
-    height:vh(100),
+const Style = StyleSheet.create({
+  container:{
     justifyContent:'space-around',
-    alignItems:'center'
-  },
-
-  //bot image
-  image:{
-    width: vw(80),
-    height:vw(80),
-    //backgroundColor:theme.primary.darker,
-    //shadowColor:theme.primary.darker,
-    borderRadius: theme.curves.full,
-    justifyContent:'center',
     alignItems:'center',
-    //shadowOffset:{width:2 , height:2},
-    //shadowOpacity:1,
-    //shadowRadius:10,
   },
-  botimage:{
+  image:{
     width:vw(60),
     height:vw(60),
+<<<<<<< HEAD
     alignSelf:'center',
   },
 
@@ -106,6 +109,8 @@ const style = StyleSheet.create({
     color: theme.gray.white,
     fontSize:vh(2.7),
     fontWeight:'500'
+=======
+>>>>>>> abca2d1 (change app)
   }
 })
 
