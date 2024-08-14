@@ -1,15 +1,16 @@
 import { user } from '@/types/app.t';
-import RNSecureStorage, {ACCESSIBLE} from 'rn-secure-storage';
+//import RNSecureStorage, {ACCESSIBLE} from 'rn-secure-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const storeUserData = async (info:user)=>{
-    const {name , password , appLock} = info
+    const {name , password , appLock , dateCreated} = info
 
     if(!name || !password ){
         return {success:false , data: 'Please fill out all the fields'}
     }
 
     const userData = JSON.stringify(info)
+    info.dateCreated = String(new Date())
 
     try{
        const session =  await AsyncStorage.setItem('user' , userData)

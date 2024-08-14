@@ -6,4 +6,14 @@ export interface user{
 }
 
 
+export interface transaction{
+    category: string;
+    name:string;
+    description:string;
+    amount:number;
+    dateCreated: string;
+}
+
+
+
 

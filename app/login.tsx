@@ -11,7 +11,7 @@ import { user } from '@/types/app.t'
 import { retrieveUserData, storeUserData } from '@/appStorage/user/user'
 import { router } from 'expo-router'
 
-const register = () => {
+const login = () => {
     const [loading, setLoading] = useState(false)
     const [formInput , setFormInput] = useState<user>({
         name:'',
@@ -31,9 +31,8 @@ const register = () => {
        const data = await retrieveUserData()
 
        if(data.success){
-        if(data.data.appLock){
+        if(!data.data.appLock){
             setLoading(false)
-            router.push('/login')
             return;
         }
 
@@ -49,7 +48,7 @@ const register = () => {
     }
 
 
-    const register = async () =>{
+    const submit = async () =>{
         //console.log(formInput)
         setLoading(true)
         const data  = await storeUserData(formInput)
@@ -70,8 +69,12 @@ const register = () => {
   return (
     <ScreenWrapper SafeArea>
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={100} style={style.container}>
+
+            
             {/* Go Back Btn */}
             <GoBackBtn/>
+
+
             {/* Greeting  */}
             <View >
                 <CustomText isheader>
@@ -84,9 +87,14 @@ const register = () => {
                     Spending <Text style={style.designtext}>Today.</Text>
                 </CustomText>
             </View>
+
+
+
             {/* form */}
             <View style={style.form}>
                 <CustomText style={{alignSelf:'flex-start'}} isSupporting text='Please provide the following information'/>
+
+
                 <View style={style.textInput}>
                     <Feather name='user' color={theme.gray.gray1} size={vh(2.5)}/>
                     <TextInput
@@ -97,6 +105,8 @@ const register = () => {
                     placeholderTextColor={theme.gray.gray1}
                     />
                 </View>
+
+
                 <View style={[style.textInput , formInput.password.length==0 ? {}:formInput.password.length < 6 ?{borderColor:'red'}:
                          formInput.password.length < 8 ?{borderColor:'yellow'}:
                          {borderColor:'green'}]}>
@@ -112,6 +122,8 @@ const register = () => {
                     placeholderTextColor={theme.gray.gray1}
                     />
                 </View>
+
+
                 <View style={[style.textInput , {borderWidth:0,paddingHorizontal:15}]}>
                     <CustomText isSupporting text='always sign in with name & password'/>
                     <Switch
@@ -120,11 +132,19 @@ const register = () => {
                     trackColor={{true:theme.primary.normal , false:theme.gray.gray2}}
                     thumbColor={'white'}
                     />
+
                 </View>
             
             </View>
+
+
             {/* submit btn */}
-            {loading?<ActivityIndicator color={theme.primary.normal} />:<CustomButton   style={{alignSelf:'center'}}  onPress={register} title='Register'/>}
+            {loading?
+            <ActivityIndicator color={theme.primary.normal} />
+            :
+            <CustomButton   style={{alignSelf:'center'}}  onPress={submit} title='Register'/>
+            }
+
         </KeyboardAvoidingView>
     </ScreenWrapper>
   )
@@ -175,4 +195,4 @@ const style = StyleSheet.create({
     }
 })
 
-export default register
+export default login
