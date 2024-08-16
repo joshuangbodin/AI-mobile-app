@@ -27,13 +27,13 @@ const ExpenseBoard = ({savings=0,income=0,expenditure=0}:props) => {
             <CustomText isheader style={{paddingBottom:5}} size={vh(2.4)} text='Expense Summary'/>
             
             <CustomText isSupporting size={vh(2.2)}>
-               Income: <CustomText>{formatCurrency(income)}</CustomText>
+               Income: <CustomText style={income>0?{color:'lightgreen'}:income!=0?{color:'red'}:{}}>{formatCurrency(income)}</CustomText>
             </CustomText>
             <CustomText isSupporting size={vh(2.2)}>
-               Total Expenses: <CustomText>{formatCurrency(expenditure)}</CustomText>
+               Total Expenses: <CustomText style={expenditure>0?{color:'lightgreen'}:expenditure!=0?{color:'red'}:{}}>{formatCurrency(expenditure)}</CustomText>
             </CustomText>
             <CustomText isSupporting size={vh(2.2)}>
-               Savings: <CustomText>{formatCurrency(savings)}</CustomText>
+               Savings: <CustomText style={savings>0?{color:'lightgreen'}:income!=0?{color:'red'}:{}}>{formatCurrency(savings)}</CustomText>
             </CustomText>
 
         </View>
@@ -46,18 +46,20 @@ const style = StyleSheet.create({
         position:'relative',
         width:vw(95),
         height:vh(20),
-        backgroundColor: theme.primary.normal,
+        backgroundColor: theme.primary.deep,
         borderRadius:theme.curves.xl,
         overflow:'hidden',
         justifyContent:'space-evenly',
-        alignItems:'center'
+        alignItems:'center',
+        borderWidth:1,
+        borderColor:'deepblue'
     },
     design:{
         position:'absolute',
         width: vw(60),
         height: vw(60),
-        backgroundColor: theme.primary.deep,
-        shadowColor: theme.primary.deep,
+        backgroundColor: theme.primary.normal,
+        shadowColor: theme.primary.normal,
         shadowOffset:{width:0,height:0},
         shadowOpacity:1,
         shadowRadius:20,

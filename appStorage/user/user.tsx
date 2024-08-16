@@ -43,7 +43,7 @@ export const retrieveUserData = async ()=>{
     }
 }
 
-export const authenticateUser =  async ({name , password}:user) =>{
+export const authenticateUser =  async (name:string , password:string) =>{
     try{
         const authUser = await retrieveUserData()
 

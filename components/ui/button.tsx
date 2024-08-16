@@ -9,15 +9,17 @@ interface props{
     onPress: ()=> void;
     isFullWidth?: boolean;
     style?:any;
+    textstyle?:any;
 }
 
-const CustomButton = ({title,onPress , isFullWidth=true , style}:props ) => {
+const CustomButton = ({title,onPress , isFullWidth=true , style , textstyle}:props ) => {
   return (
     <TouchableOpacity style={[
-       isFullWidth? styles.btnContainer:{...styles.btnContainer , width:'auto'}
+       isFullWidth? styles.btnContainer:{...styles.btnContainer , width:'auto'},
+       style
 
         ]} onPress={onPress}>
-        <Text style = {styles.btntext}>{title}</Text>
+        <Text style = {[styles.btntext , textstyle]}>{title}</Text>
     </TouchableOpacity>
   )
 }

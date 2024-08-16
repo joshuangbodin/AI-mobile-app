@@ -22,6 +22,7 @@ import { Feather, FontAwesome6, MaterialCommunityIcons, MaterialIcons } from '@e
 import { theme } from '@/constants/theme'
 import ExpenseBoard from '@/components/functional/expenseBoard'
 import TransactionList from '@/components/functional/list'
+import NewEntryBtn from '@/components/functional/newEntryBtn'
 
 
 const home = () => {
@@ -108,14 +109,23 @@ const home = () => {
         </View>
 
 
+<<<<<<< HEAD
     </ScreenWrapper>
 >>>>>>> abca2d1 (change app)
+=======
+
+    {/* add button */}
+    <View><NewEntryBtn/></View>
+  </ScreenWrapper>
+>>>>>>> a4e9b51 (designed the new entry form)
   )
 }
 
 const style = StyleSheet.create({
   container:{
+    position:'relative',
     paddingHorizontal:8,
+    flex:1,
   },
 
   //top
@@ -140,12 +150,13 @@ const style = StyleSheet.create({
   //call to action
 
   action:{
-    marginTop:5,
+    marginTop:15,
     paddingLeft:10,
-    paddingVertical:15,
+    
     gap:15,
-    height: vh(10),
+    height: vh(6),
 
+    marginBottom:0,
   },
 
   actionbtn:{
@@ -156,12 +167,15 @@ const style = StyleSheet.create({
     alignItems:'center',
     borderCurve:'continuous',
     flexDirection:'row'
+
   },
 
   listarea:{
-    height:vh(60),
-    padding:20,
-   
+    width:vw(95),
+    paddingHorizontal:5,
+    flex:1,
+   minHeight:vh(61),
+   alignSelf:'center',
   }
 
 })

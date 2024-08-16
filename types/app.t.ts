@@ -7,13 +7,18 @@ export interface user{
 
 
 export interface transaction{
+    type:'income'|'expenditure',
     category: string;
     name:string;
     description:string;
-    amount:number;
+    amount:string;
     dateCreated: string;
 }
 
 
+
+export interface transactionList{
+
+}
 
 

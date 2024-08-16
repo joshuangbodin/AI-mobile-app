@@ -30,7 +30,7 @@ const login = () => {
         }
 
         try {
-            const data = await authenticateUser(formInput)
+            const data = await authenticateUser(name , password)
 
             if (data.success) {
                 setLoading(false)
