@@ -7,12 +7,12 @@ import { formatCurrency } from '@/helpers/pricecustomization'
 
 
 interface props {
-    total?:number;
+    savings?:number;
     income?:number;
     expenditure?:number;
 }
 
-const ExpenseBoard = ({total=0,income=0,expenditure=0}:props) => {
+const ExpenseBoard = ({savings=0,income=0,expenditure=0}:props) => {
 
 
 
@@ -23,40 +23,18 @@ const ExpenseBoard = ({total=0,income=0,expenditure=0}:props) => {
 
 
         <View style={style.infobox}>
-
-            {/* total */}
-            <View style={style.flexed}>
-            <View style={{}}>
-            <CustomText isSupporting text='Total:'/>
-                <CustomText style={{fontSize:vh(4)}} isheader>
-                    
-                    {
-                        total? 
-                        total:
-                        '₦ 0.00'
-                        
-                    }
-                </CustomText>
-            </View>
-            <View>
-                <Text></Text>
-            </View>
-            </View>
-
-            {/* income & expenditure */}
-
-            <View style={style.flexed}>
-                <View style={style.moreinfo}>
-                    <CustomText isSupporting text='Income:'/><CustomText text='# 0.00'/>
-                </View>
-                <View style={style.moreinfo}>
-                    <CustomText
-                    isSupporting
-                    text='Expenditure:'/><CustomText text='# 0.00'/>
-                </View>
-
-            </View>
-
+            {/* header */}
+            <CustomText isheader style={{paddingBottom:5}} size={vh(2.4)} text='Expense Summary'/>
+            
+            <CustomText isSupporting size={vh(2.2)}>
+               Income: <CustomText>{formatCurrency(income)}</CustomText>
+            </CustomText>
+            <CustomText isSupporting size={vh(2.2)}>
+               Total Expenses: <CustomText>{formatCurrency(expenditure)}</CustomText>
+            </CustomText>
+            <CustomText isSupporting size={vh(2.2)}>
+               Savings: <CustomText>{formatCurrency(savings)}</CustomText>
+            </CustomText>
 
         </View>
     </View>
@@ -91,18 +69,18 @@ const style = StyleSheet.create({
     },
 
     infobox:{
-        justifyContent:'space-evenly',
-        alignItems:'center',
+        padding:15,
         width:'100%',
         height:'100%',
+        gap:10,
     },
 
     //flexed
 
     flexed:{
-        flexDirection:'row',
+        
         justifyContent:'space-around',
-        width:vw(90)
+       
     },
     moreinfo:{
         flexDirection:'row',

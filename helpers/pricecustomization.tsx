@@ -1,9 +1,9 @@
 
 
 export const formatCurrency = (price:number)=>{
-       
-    return {currency:'₦' , number:String(price) , attachment:'NGN'}
+      //{currency:'₦' , number:String(price) , attachment:'NGN'} 
 
+      const data = Intl.NumberFormat('en-EN' , {style:'currency' ,currency:'NGN' , currencyDisplay:'narrowSymbol'}).format(price)
 
-        
+    return data    
 }

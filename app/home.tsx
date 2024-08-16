@@ -33,7 +33,6 @@ const home = () => {
     initializeUserInfo()
   } , [])
 
-console.log(new Date())
 
   const initializeUserInfo  = async ()=>{
     const data = await retrieveUserData()

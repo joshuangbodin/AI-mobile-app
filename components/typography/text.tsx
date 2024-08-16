@@ -10,6 +10,7 @@ interface props {
     isCentered?: boolean;
     style?: any;
     children?: React.ReactNode;
+    size?:number;
 }
 
 
@@ -19,7 +20,8 @@ const CustomText = ({
     style,
     isSupporting = false,
     isCentered = false,
-    children
+    children,
+    size
 }
     : props) => {
 
@@ -30,7 +32,8 @@ const CustomText = ({
                     styles.text,
                     isheader ? styles.headertext : isSupporting && styles.supporting,
                     isCentered && { textAlign: 'center' },
-                    style
+                    style,
+                    size&&{fontSize:size}
                 ]}
             >
                 {children}
@@ -45,7 +48,8 @@ const CustomText = ({
                 styles.text,
                 isheader ? styles.headertext : isSupporting && styles.supporting,
                 isCentered && { textAlign: 'center' },
-                style
+                style,
+                size&&{fontSize:size}
             ]}
         >
             {text}
