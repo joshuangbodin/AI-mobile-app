@@ -15,7 +15,7 @@ import React, { useEffect, useState } from 'react'
 >>>>>>> 80f600a (started work on the home page)
 import ScreenWrapper from '@/components/ScreenWrapper'
 import CustomText from '@/components/typography/text'
-import { user } from '@/types/app.t'
+import { transactionList, user } from '@/types/app.t'
 import { retrieveUserData } from '@/appStorage/user/user'
 import { vh, vw } from '@/helpers/responsivesizes'
 import { Feather, FontAwesome6, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
@@ -23,16 +23,26 @@ import { theme } from '@/constants/theme'
 import ExpenseBoard from '@/components/functional/expenseBoard'
 import TransactionList from '@/components/functional/list'
 import NewEntryBtn from '@/components/functional/newEntryBtn'
+import { clearList, getListFromStorage } from '@/appStorage/transactions/transactions'
+import { getExpenseSummary } from '@/appStorage/transactions/Calculations'
 
 
 const home = () => {
-
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [userInfo , setUserInfo] =  useState<user>()
+  const [transactionList , setTransationList] = useState<transactionList>()
+  const [track , setTrack] = useState(0)
+
+  // expenseSummary
+  const [ expenseSummary , setExpenseSummary] = useState({income:0 , expenditure:0, savings:0})
 
   //initial render
   useEffect(()=>{
+    
     initializeUserInfo()
-  } , [])
+    initializeList()
+    initializeExpenseSummary()
+  }, [isOpen , track])
 
 
   const initializeUserInfo  = async ()=>{
@@ -43,7 +53,34 @@ const home = () => {
     }
   }
 
+  const initializeExpenseSummary = async()=>{
 
+    const data = await getExpenseSummary()
+
+    if(data)
+    {
+      const {income ,expenditure , savings}=data
+      setExpenseSummary({income,expenditure,savings})
+    }
+
+  }
+
+  const initializeList = async ()=>{
+    const data = await getListFromStorage()
+
+    if(data.success){
+      setTransationList(data.data)
+    }
+    
+  }
+
+ const toggle = ()=>{
+  setIsOpen(!isOpen)
+ }
+
+ const increment =()=>{
+  setTrack(track+1)
+ }
 
 
   return (
@@ -66,12 +103,18 @@ const home = () => {
        {/* expense board */}
 
       <View style={style.expenseboard}>
-            <ExpenseBoard/>
+            <ExpenseBoard 
+            income={expenseSummary.income}
+            expenditure={expenseSummary.expenditure}
+            savings={expenseSummary.savings}
+            />
       </View>
 
       {/* call to actions */}
       <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={style.action}>
 
+
+        {/* button 1 */}
         <TouchableOpacity style={style.actionbtn}>
 
           <FontAwesome6 color={theme.gray.gray2} size={vh(1.8)} name='money-bill-trend-up'/>
@@ -82,7 +125,7 @@ const home = () => {
 
         </TouchableOpacity>
 
-
+        {/* button 2 */}
         <TouchableOpacity style={style.actionbtn}>
         <FontAwesome6 color={theme.gray.gray2} size={vh(1.8)} name='piggy-bank'/>
 
@@ -91,6 +134,7 @@ const home = () => {
           <Feather color={theme.gray.white} size={vh(1.8)} name='chevron-right'/>
         </TouchableOpacity>
 
+        {/* button 3 */}
         <TouchableOpacity style={style.actionbtn}>
         <MaterialIcons color={theme.gray.gray2} size={vh(1.8)} name='celebration'/>
 
@@ -105,7 +149,11 @@ const home = () => {
       {/* list area */}
 
         <View style={style.listarea}>
-          <TransactionList/>
+        <CustomText 
+      isSupporting 
+      style={{ paddingTop: 20 , paddingBottom:10}} 
+      text='All Transactions' />
+          <TransactionList isOpen={track} setIsOpen={increment} data={transactionList}/>
         </View>
 
 
@@ -115,7 +163,7 @@ const home = () => {
 =======
 
     {/* add button */}
-    <View><NewEntryBtn/></View>
+    <View><NewEntryBtn isOpen={isOpen} setIsOpen={toggle}/></View>
   </ScreenWrapper>
 >>>>>>> a4e9b51 (designed the new entry form)
   )

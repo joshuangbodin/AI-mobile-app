@@ -18,7 +18,7 @@ export interface transaction{
 
 
 export interface transactionList{
-
+    list: transaction[]
 }
 
 

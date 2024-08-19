@@ -8,13 +8,19 @@ import CustomText from '../typography/text'
 import CustomButton from '../ui/button'
 import { categories } from '@/constants/functional'
 import { transaction } from '@/types/app.t'
+import { addToList } from '@/appStorage/transactions/transactions'
 
 
+interface props {
+    isOpen:boolean;
+    setIsOpen: ()=>void;
+}
 
-const NewEntryBtn = () => {
+
+const NewEntryBtn = ({isOpen , setIsOpen}:props) => {
 
 
-    const [isOpen, setIsOpen] = useState<Boolean>(true)
+    
 
     const [transaction, setTransaction] = useState<transaction>({
         name: '',
@@ -25,6 +31,26 @@ const NewEntryBtn = () => {
         dateCreated: ''
     })
 
+
+    const createEntry = async() =>{
+        const {name , description , amount, type,category} = transaction
+
+        if(!name || !description || !amount || !type || !category){
+            console.log('provide all the useful infomation')
+            return;
+        }
+
+        if(Number.isNaN(Number(amount))){
+            console.log('amount is not a number')
+            return;
+        }
+
+
+
+
+        await addToList(transaction)
+        setIsOpen()
+    }
 
     return (
         <View style={styles.cont}>
@@ -99,7 +125,7 @@ const NewEntryBtn = () => {
                         <CustomText text='categories:' isSupporting />
                         <FlatList
                             horizontal
-                            data={categories.expense}
+                            data={transaction.type == 'expenditure' ?categories.expense: categories.income}
                             renderItem={({ item }) =>
                             (<TouchableOpacity
                             onPress={()=> {setTransaction({...transaction,category:item})}}
@@ -117,11 +143,16 @@ const NewEntryBtn = () => {
 
 
                     {/* button */}
-                    <CustomButton textstyle={{ fontWeight: '500', fontSize: vh(2) }} isFullWidth={false} style={{ height: vh(6) }} onPress={() => { }} title='Create Entry' />
+                    <CustomButton 
+                    textstyle={{ fontWeight: '500', fontSize: vh(2) }} 
+                    isFullWidth={false} 
+                    style={{ height: vh(6) }} 
+                    onPress={createEntry} 
+                    title='Create Entry' />
                 </KeyboardAvoidingView>}
 
             {/* button */}
-            <TouchableOpacity onPress={() => { setIsOpen(!isOpen) }} style={[styles.btn]}>
+            <TouchableOpacity onPress={setIsOpen} style={[styles.btn]}>
                 <Ionicons size={vh(4.5)} color={theme.gray.white} name={isOpen ? 'close-outline' : 'add'} />
             </TouchableOpacity>
 
