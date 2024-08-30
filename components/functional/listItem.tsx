@@ -35,7 +35,7 @@ const ListItem = ({ name, description, amount, type, category, dateCreated, onLo
 
                 </View>
                 <View  style={[style.cate  , {backgroundColor:randomCategoryColorGenerator(name)}]}>
-                    <CustomText size={vh(1.4)} text={category} />
+                    <CustomText isSupporting style={{color:theme.gray.white}} size={vh(1.4)} text={category} />
                 </View>
             </View>
 
