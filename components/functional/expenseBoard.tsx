@@ -36,6 +36,7 @@ const ExpenseBoard = ({ savings = 0, income = 0, expenditure = 0 }: props) => {
 
                     <CustomText
                         isheader size={vh(3)}
+                        autosize
                         style={[
                             
                         ]}>{formatCurrency(savings)}</CustomText>
@@ -51,11 +52,13 @@ const ExpenseBoard = ({ savings = 0, income = 0, expenditure = 0 }: props) => {
                             size={vh(1.4)}
                             style={{ fontWeight: '500' }}
                             isSupporting
+                            
                         >Income</CustomText>
                         <CustomText
+                            autosize
                             isheader size={vh(2.3)}
+                            text={formatCurrency(income,true)}
                             >
-                            {formatCurrency(income)}
                         </CustomText>
                     </View>
 
@@ -66,7 +69,7 @@ const ExpenseBoard = ({ savings = 0, income = 0, expenditure = 0 }: props) => {
                             style={{ fontWeight: '500' }}
                             isSupporting
                         >Expense</CustomText>
-                        <CustomText isheader size={vh(2.3)}  >{formatCurrency(expenditure)}</CustomText>
+                        <CustomText isheader size={vh(2.3)}  >{formatCurrency(expenditure, true)}</CustomText>
                     </View>
                 </View>
 

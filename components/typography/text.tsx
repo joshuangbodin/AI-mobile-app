@@ -2,6 +2,8 @@ import { StyleSheet, Text } from 'react-native'
 import React from 'react'
 import { vh } from '@/helpers/responsivesizes';
 import { theme } from '@/constants/theme';
+import { AutoSizeText, ResizeTextMode } from 'react-native-auto-size-text'
+
 
 interface props {
     text?: string;
@@ -11,6 +13,7 @@ interface props {
     style?: any;
     children?: React.ReactNode;
     size?:number;
+    autosize? : boolean;
 }
 
 
@@ -21,13 +24,15 @@ const CustomText = ({
     isSupporting = false,
     isCentered = false,
     children,
-    size
+    size,
+    autosize = false
 }
     : props) => {
 
+
     if (children) {
         return (
-            <Text
+             <Text
                 style={[
                     styles.text,
                     isheader ? styles.headertext : isSupporting && styles.supporting,
@@ -38,6 +43,26 @@ const CustomText = ({
             >
                 {children}
             </Text>
+        )
+    }
+
+    if(autosize){
+        return(
+            <AutoSizeText
+            minFontSize={10}
+            numberOfLines={1}
+            fontSize={size? size : vh(1.3)}
+            mode={ResizeTextMode.min_font_size}
+            style={[
+                styles.text,
+                isheader ? styles.headertext : isSupporting && styles.supporting,
+                isCentered && { textAlign: 'center' },
+                style,
+                size&&{fontSize:size}
+            ]}
+            >
+                {text}
+            </AutoSizeText>
         )
     }
 

@@ -137,7 +137,8 @@ const home = () => {
 
         <View style={style.listarea}>
         <CustomText 
-      isSupporting 
+      isSupporting
+      size={vh(1.7)} 
       style={{ paddingTop: 20 , paddingBottom:10}} 
       text='All Transactions' />
           <TransactionList isOpen={track} setIsOpen={increment} data={transactionList}/>
@@ -164,7 +165,8 @@ const style = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-between',
     alignItems:'center',
-    padding:5,
+    paddingHorizontal:10,
+    paddingTop:4
   }
   ,
   name:{
@@ -206,7 +208,7 @@ const style = StyleSheet.create({
 
   listarea:{
     width:vw(95),
-    paddingHorizontal:5,
+    paddingHorizontal:10,
     flex:1,
    minHeight:vh(58),
    alignSelf:'center',

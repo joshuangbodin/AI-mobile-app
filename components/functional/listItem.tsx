@@ -29,7 +29,7 @@ const ListItem = ({ name, description, amount, type, category, dateCreated, onLo
                     </View>
                     <CustomText isheader size={vh(2.7)}>
 
-                        {formatCurrency(Number(amount))}
+                        {formatCurrency(Number(amount) , true)}
                     </CustomText>
 
                 </View>
