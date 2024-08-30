@@ -133,7 +133,7 @@ const NewEntryBtn = ({isOpen , setIsOpen}:props) => {
                                 <CustomText text={item} />
                             </TouchableOpacity>)
                             }
-                            style={{ marginTop: 5 } }
+                            style={{ marginTop: 5 } } 
                             contentContainerStyle={{
                                 gap: 5
                             }}
