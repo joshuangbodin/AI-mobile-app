@@ -174,6 +174,8 @@ const style = StyleSheet.create({
   //expense board
   expenseboard:{
     marginTop:20,
+    justifyContent:'center',
+    alignItems:'center',
   }
 
   ,
@@ -205,7 +207,7 @@ const style = StyleSheet.create({
     width:vw(95),
     paddingHorizontal:5,
     flex:1,
-   minHeight:vh(61),
+   minHeight:vh(58),
    alignSelf:'center',
   }
 

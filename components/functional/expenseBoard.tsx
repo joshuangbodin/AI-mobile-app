@@ -1,92 +1,131 @@
-import { View, Text , StyleSheet} from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { vh, vw } from '@/helpers/responsivesizes'
 import { theme } from '@/constants/theme'
 import CustomText from '../typography/text'
 import { formatCurrency } from '@/helpers/pricecustomization'
-
+import { LinearGradient } from 'expo-linear-gradient'
 
 interface props {
-    savings?:number;
-    income?:number;
-    expenditure?:number;
+    savings?: number;
+    income?: number;
+    expenditure?: number;
 }
 
-const ExpenseBoard = ({savings=0,income=0,expenditure=0}:props) => {
+const ExpenseBoard = ({ savings = 0, income = 0, expenditure = 0 }: props) => {
 
 
 
-  return (
-    <View style={style.container}>
-        <View style={style.design}></View>
-        <View style={[style.design]}></View>
+    return (
+        <LinearGradient
+            colors={[theme.primary.deep, '#543cab', theme.primary.dark,]}
+            style={style.container}
+            start={{ x: 0, y: 1 }}
+            end={{ x: 1, y: -2 }}
+        >
+            <View style={style.infobox}>
+
+                {/* Savings */}
+                <View>
+                    <CustomText
+                        size={vh(1.6)}
+                        style={{ fontWeight: '500' }}
+                        isSupporting
+                    >Savings
+                    </CustomText>
+
+                    <CustomText
+                        isheader size={vh(3)}
+                        style={[
+                            
+                        ]}>{formatCurrency(savings)}</CustomText>
+                </View>
+
+                {/* false code */}
+                <CustomText isSupporting>XXXX    XXXX   XXXX    XXXX</CustomText>
+
+                {/* other Expenditure info */}
+                <View style={style.flexed}>
+                    <View style={style.valuecont}>
+                        <CustomText
+                            size={vh(1.4)}
+                            style={{ fontWeight: '500' }}
+                            isSupporting
+                        >Income</CustomText>
+                        <CustomText
+                            isheader size={vh(2.3)}
+                            >
+                            {formatCurrency(income)}
+                        </CustomText>
+                    </View>
 
 
-        <View style={style.infobox}>
-            {/* header */}
-            <CustomText isheader style={{paddingBottom:5}} size={vh(2.4)} text='Expense Summary'/>
-            
-            <CustomText isSupporting size={vh(2.2)}>
-               Income: <CustomText style={income>0?{color:'lightgreen'}:income!=0?{color:'red'}:{}}>{formatCurrency(income)}</CustomText>
-            </CustomText>
-            <CustomText isSupporting size={vh(2.2)}>
-               Total Expenses: <CustomText style={expenditure>0?{color:'lightgreen'}:expenditure!=0?{color:'red'}:{}}>{formatCurrency(expenditure)}</CustomText>
-            </CustomText>
-            <CustomText isSupporting size={vh(2.2)}>
-               Savings: <CustomText style={savings>0?{color:'lightgreen'}:income!=0?{color:'red'}:{}}>{formatCurrency(savings)}</CustomText>
-            </CustomText>
+                    <View style={style.valuecont}>
+                        <CustomText
+                            size={vh(1.4)}
+                            style={{ fontWeight: '500' }}
+                            isSupporting
+                        >Expense</CustomText>
+                        <CustomText isheader size={vh(2.3)}  >{formatCurrency(expenditure)}</CustomText>
+                    </View>
+                </View>
 
-        </View>
-    </View>
-  )
+            </View>
+        </LinearGradient>
+    )
 }
 
 const style = StyleSheet.create({
-    container:{
-        position:'relative',
-        width:vw(95),
-        height:vh(20),
+    container: {
+        position: 'relative',
+        width: vw(90),
+        height: vh(23),
         backgroundColor: theme.primary.deep,
-        borderRadius:theme.curves.xl,
-        overflow:'hidden',
-        justifyContent:'space-evenly',
-        alignItems:'center',
-        borderWidth:1,
-        borderColor:'deepblue'
+        borderRadius: theme.curves.xxl,
+        overflow: 'hidden',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: 'deepblue'
     },
-    design:{
-        position:'absolute',
+    design: {
+        position: 'absolute',
         width: vw(60),
         height: vw(60),
         backgroundColor: theme.primary.normal,
         shadowColor: theme.primary.normal,
-        shadowOffset:{width:0,height:0},
-        shadowOpacity:1,
-        shadowRadius:20,
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 1,
+        shadowRadius: 20,
         elevation: 10,
-        borderRadius:theme.curves.xxl,
-        right:vw(-45),
-        transform:'rotate(15deg)',
-        zIndex:-12,
+        borderRadius: theme.curves.xxl,
+        right: vw(-45),
+        transform: 'rotate(15deg)',
+        zIndex: -12,
     },
 
-    infobox:{
-        padding:15,
-        width:'100%',
-        height:'100%',
-        gap:10,
+    infobox: {
+        padding: 15,
+        width: '100%',
+        height: '100%',
+        gap: 10,
+        justifyContent: 'space-around',
+        paddingRight: 50,
     },
 
     //flexed
 
-    flexed:{
-        
-        justifyContent:'space-around',
-       
+    flexed: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+
     },
-    moreinfo:{
-        flexDirection:'row',
-        gap:5,
+    moreinfo: {
+        flexDirection: 'row',
+        gap: 5,
+    },
+    valuecont:{
+        width:vw(30)
     }
 })
 
