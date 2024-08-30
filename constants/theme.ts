@@ -3,10 +3,11 @@ export const theme = {
         normal: '#003ec9',
         light: '#0247db',
         deep: '#022879',
-        dark: '#181818',
+        dark: '#191919',
         darker:'#000000',
         black:'#070707',
         alt:'#4a4949',
+        purple: '#543cab'
     },
     gray:{
         white:'#fff',

@@ -18,7 +18,7 @@ const ExpenseBoard = ({ savings = 0, income = 0, expenditure = 0 }: props) => {
 
     return (
         <LinearGradient
-            colors={[theme.primary.deep, '#543cab', theme.primary.dark,]}
+            colors={[theme.primary.deep, theme.primary.purple, theme.primary.dark,]}
             style={style.container}
             start={{ x: 0, y: 1 }}
             end={{ x: 1, y: -2 }}
@@ -42,7 +42,7 @@ const ExpenseBoard = ({ savings = 0, income = 0, expenditure = 0 }: props) => {
                 </View>
 
                 {/* false code */}
-                <CustomText isSupporting>XXXX    XXXX   XXXX    XXXX</CustomText>
+                <CustomText size={vh(1.7)} isSupporting>XXXX    XXXX   XXXX    XXXX</CustomText>
 
                 {/* other Expenditure info */}
                 <View style={style.flexed}>
@@ -78,7 +78,7 @@ const ExpenseBoard = ({ savings = 0, income = 0, expenditure = 0 }: props) => {
 const style = StyleSheet.create({
     container: {
         position: 'relative',
-        width: vw(90),
+        width: vw(91),
         height: vh(23),
         backgroundColor: theme.primary.deep,
         borderRadius: theme.curves.xxl,

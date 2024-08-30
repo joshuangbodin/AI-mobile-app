@@ -76,14 +76,14 @@ const home = () => {
        {/* top */}
        <View style={style.top}>
             <View>
-              <CustomText isSupporting text='Hello!'/>
+              <CustomText size={vh(1.6)} isSupporting text='Hello!'/>
               {userInfo?<CustomText isheader style={style.name} text={userInfo.name}/>:<CustomText isheader style={style.name} text={'user'}/>}
             </View>
 
             {/* delete user button */}
 
             <TouchableOpacity>
-              <FontAwesome6 name="bars-staggered" size={vh(4)} color={theme.gray.gray2}/>
+              <FontAwesome6 name="bars-staggered" size={vh(3.4)} color={theme.gray.gray2}/>
             </TouchableOpacity>
        </View>
 
@@ -183,7 +183,7 @@ const style = StyleSheet.create({
   //call to action
 
   action:{
-    marginTop:15,
+    marginTop:20,
     paddingLeft:10,
     
     gap:15,
@@ -194,6 +194,7 @@ const style = StyleSheet.create({
 
   actionbtn:{
     minWidth: vw(40),
+    maxWidth:250,
     justifyContent:'space-around',
     backgroundColor:theme.primary.dark,
     borderRadius:theme.curves.lg,

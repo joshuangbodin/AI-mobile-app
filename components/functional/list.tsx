@@ -1,7 +1,7 @@
-import { View, Text, FlatList } from 'react-native'
+import { View, Image, FlatList } from 'react-native'
 import React from 'react'
 import CustomText from '../typography/text'
-import { vh } from '@/helpers/responsivesizes'
+import { vh, vw } from '@/helpers/responsivesizes'
 import { transactionList } from '@/types/app.t'
 import ListItem from './listItem'
 import { deleteFromList } from '@/appStorage/transactions/transactions'
@@ -61,12 +61,22 @@ const TransactionList = ({ data , isOpen , setIsOpen }: props) => {
       }
 
       ListEmptyComponent={
-        <CustomText
-          isCentered
-          isSupporting
-          style={{ paddingTop: vh(20) }}
-          text='No Transaction yet'
-        />}
+        <View style={{
+          flex:1,
+          justifyContent:'center',
+          alignItems:'center',
+          minHeight: 300,
+        }}>
+          <Image 
+          
+          style={{
+            width: vw(30),
+            height: vw(30)
+          }} 
+          source={require('../../assets/images/empty.png')}/>
+          <CustomText isSupporting>No Transaction Yet</CustomText>
+        </View>
+        }
 
         contentContainerStyle={{
           gap:8

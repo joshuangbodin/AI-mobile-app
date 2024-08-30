@@ -9,6 +9,7 @@ import CustomButton from '../ui/button'
 import { categories } from '@/constants/functional'
 import { transaction } from '@/types/app.t'
 import { addToList } from '@/appStorage/transactions/transactions'
+import { LinearGradient } from 'expo-linear-gradient'
 
 
 interface props {
@@ -152,8 +153,15 @@ const NewEntryBtn = ({isOpen , setIsOpen}:props) => {
                 </KeyboardAvoidingView>}
 
             {/* button */}
-            <TouchableOpacity onPress={setIsOpen} style={[styles.btn]}>
-                <Ionicons size={vh(4.5)} color={theme.gray.white} name={isOpen ? 'close-outline' : 'add'} />
+            <TouchableOpacity onPress={setIsOpen}>
+                <LinearGradient
+                colors={[theme.primary.deep, theme.primary.purple, theme.primary.dark,]}
+                style={styles.btn}
+                start={{ x: 0, y: 1 }}
+                end={{ x: 1, y: -2 }}
+                >
+                    <Ionicons size={vh(4.5)} color={theme.gray.white} name={isOpen ? 'close-outline' : 'add'} />
+                </LinearGradient>
             </TouchableOpacity>
 
 
