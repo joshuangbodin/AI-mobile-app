@@ -1,15 +1,10 @@
-import { View, Text , Image , StyleSheet} from 'react-native'
+import { View, Text , Image , StyleSheet, ImageBackground, TouchableOpacity} from 'react-native'
 import React from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
-<<<<<<< HEAD
 import { theme } from '@/constants/theme'
-
 import { vh, vw } from '@/helpers/responsivesizes'
-=======
-import { vw } from '@/helpers/responsivesizes'
 import CustomText from '@/components/typography/text'
 import CustomButton from '@/components/ui/button'
->>>>>>> abca2d1 (change app)
 import { router } from 'expo-router'
 
 const index = () => {
@@ -31,32 +26,9 @@ const index = () => {
       {/* call to action button */}
       <CustomButton title = {'Get Started' } onPress={()=>{router.push('/register')}}/>
 
-      
-<<<<<<< HEAD
-      <ImageBackground source={require('../assets/images/backgroundImage.jpg')}>
-        <View style={style.page}>
-          {/*Bot Image*/ }
-          <View style={style.image}>
-            <Image resizeMode='contain' style={style.botimage}  source={require('../assets/images/bot.png')}></Image>
-          </View>
-
-          {/* Text info */}
-          <View style={style.textarea}>
-            <Text style={style.textHead}>Providing the </Text>
-            <Text style={style.textHead}> best AI solutions</Text>
-            <Text style={style.textbottom}>AI assistant can answer any of your questions. just ask here.</Text>
-          </View>
-
-          {/* button element */}
-          <TouchableOpacity style={style.btn} onPress={()=>router.push('home')}>
-            <Text style={style.btntext} >Get Started</Text>
-          </TouchableOpacity>
-
-        </View>
-        </ImageBackground>
      
-=======
->>>>>>> abca2d1 (change app)
+     
+
     </ScreenWrapper>
   )
 }
@@ -69,7 +41,6 @@ const Style = StyleSheet.create({
   image:{
     width:vw(60),
     height:vw(60),
-<<<<<<< HEAD
     alignSelf:'center',
   },
 
@@ -109,8 +80,7 @@ const Style = StyleSheet.create({
     color: theme.gray.white,
     fontSize:vh(2.7),
     fontWeight:'500'
-=======
->>>>>>> abca2d1 (change app)
+
   }
 })
 

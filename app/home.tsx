@@ -1,18 +1,5 @@
-<<<<<<< HEAD
-import { View, Text } from 'react-native'
-import React from 'react'
-<<<<<<< HEAD
-
-const home = () => {
-  return (
-    <View>
-      <Text>home</Text>
-    </View>
-=======
-=======
 import { View, Text  , StyleSheet, TouchableOpacity, ScrollView, FlatList} from 'react-native'
 import React, { useEffect, useState } from 'react'
->>>>>>> 80f600a (started work on the home page)
 import ScreenWrapper from '@/components/ScreenWrapper'
 import CustomText from '@/components/typography/text'
 import { transactionList, user } from '@/types/app.t'
@@ -157,15 +144,11 @@ const home = () => {
         </View>
 
 
-<<<<<<< HEAD
-    </ScreenWrapper>
->>>>>>> abca2d1 (change app)
-=======
 
     {/* add button */}
     <View><NewEntryBtn isOpen={isOpen} setIsOpen={toggle}/></View>
   </ScreenWrapper>
->>>>>>> a4e9b51 (designed the new entry form)
+
   )
 }
 
