@@ -16,7 +16,7 @@ const login = () => {
     const [formInput, setFormInput] = useState<user>({
         name: '',
         password: '',
-        dateCreated: '',
+        dateCreated: new Date,
         appLock: false,
     })
 

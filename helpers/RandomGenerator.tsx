@@ -25,7 +25,7 @@ const expenseColors = [
 
 
 export const randomCategoryColorGenerator = (categoryName: string) => {
-
+   
     var color = incomeColors[1]
 
     income.forEach(

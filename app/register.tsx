@@ -17,7 +17,7 @@ const register = () => {
         name: '',
         password: '',
         appLock: false,
-        dateCreated: '',
+        dateCreated: new Date,
     })
 
     useEffect(() => {

@@ -106,7 +106,7 @@ const home = () => {
 
           <FontAwesome6 color={theme.gray.gray2} size={vh(1.8)} name='money-bill-trend-up'/>
 
-          <CustomText text='Set a Goal'/>
+          <CustomText text='Analytics'/>
 
           <Feather color={theme.gray.white} size={vh(1.8)} name='chevron-right'/>
 
@@ -116,7 +116,7 @@ const home = () => {
         <TouchableOpacity style={style.actionbtn}>
         <FontAwesome6 color={theme.gray.gray2} size={vh(1.8)} name='piggy-bank'/>
 
-          <CustomText text='Start Budget'/>
+          <CustomText text='Budget'/>
 
           <Feather color={theme.gray.white} size={vh(1.8)} name='chevron-right'/>
         </TouchableOpacity>
