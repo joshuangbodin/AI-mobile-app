@@ -6,6 +6,7 @@ import { formatCurrency } from '@/helpers/pricecustomization';
 import { vh, vw } from '@/helpers/responsivesizes';
 import { Feather } from '@expo/vector-icons';
 import { theme } from '@/constants/theme';
+import { randomCategoryColorGenerator } from '@/helpers/RandomGenerator';
 
 interface listprops {
     name: string;
@@ -13,7 +14,7 @@ interface listprops {
     amount: string;
     type: string;
     category: string;
-    dateCreated: string;
+    dateCreated: Date;
     onPress?: () => void;
     onLongPress?: () => void;
 }
@@ -23,7 +24,7 @@ const ListItem = ({ name, description, amount, type, category, dateCreated, onLo
     return (
         <TouchableOpacity style={style.container} onLongPress={onLongPress}>
             {/* price and category */}
-            <View style={{width:'50%', justifyContent:'space-around' , gap:7}}>
+            <View style={{width:'50%', justifyContent:'space-around' , height:'100%'}}>
                 <View style={[style.amount]}>
                     <View style={[style.sign, type !== 'expenditure' && { backgroundColor: 'green' }]}>
                     </View>
@@ -33,16 +34,16 @@ const ListItem = ({ name, description, amount, type, category, dateCreated, onLo
                     </CustomText>
 
                 </View>
-                <View  style={style.cate}>
-                    <CustomText size={vh(1.7)} text={category} />
+                <View  style={[style.cate  , {backgroundColor:randomCategoryColorGenerator(name)}]}>
+                    <CustomText size={vh(1.4)} text={category} />
                 </View>
             </View>
 
             {/* other info */}
-            <View style={{width:'50%' , justifyContent:'space-around'}}>
+            <View style={{width:'50%' , justifyContent:'space-around',height:'100%'}}>
                 <CustomText style={{fontWeight:'700'}} text={name} />
                 <CustomText size={vh(1.8)} text={description} />
-                <CustomText isSupporting text={dateCreated.slice(0, 15) + "..."} />
+                <CustomText isSupporting text={String(dateCreated).slice(0,10)} />
             </View>
         </TouchableOpacity>
     )
@@ -56,8 +57,8 @@ const style = StyleSheet.create({
         padding: 10,
         alignItems: 'center',
         backgroundColor: theme.primary.dark,
-        borderRadius:theme.curves.lg,
-        height: vh(11),
+        borderRadius:theme.curves.xl,
+        height: vh(12),
         gap:5,
     },
 
@@ -80,8 +81,9 @@ const style = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         borderRadius: theme.curves.full,
-        width:'50%',
+        minWidth:'50%',
         padding:1.5,
+        maxWidth:'75%'
     }
 })
 

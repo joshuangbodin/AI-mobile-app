@@ -12,7 +12,7 @@ export const storeUserData = async (info:user)=>{
     }
 
     const userData = JSON.stringify(info)
-    info.dateCreated = String(new Date())
+    info.dateCreated = new Date()
 
     try{
        const session =  await AsyncStorage.setItem('user' , userData)

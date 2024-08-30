@@ -29,7 +29,7 @@ const NewEntryBtn = ({isOpen , setIsOpen}:props) => {
         amount: '',
         type: 'income',
         category: '',
-        dateCreated: ''
+        dateCreated: new Date
     })
 
 

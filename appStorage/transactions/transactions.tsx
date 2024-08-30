@@ -56,7 +56,7 @@ export const addToList = async (info: transaction) => {
     if (success) {
 
         //field manipulation
-        const dateCreated = String(new Date())
+        const dateCreated = new Date()
        
 
         //optimizing the list

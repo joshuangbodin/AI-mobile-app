@@ -2,7 +2,7 @@ export interface user{
     name : string ;
     password : string ;
     appLock : boolean ; 
-    dateCreated : string;
+    dateCreated : Date;
 }
 
 
@@ -12,7 +12,7 @@ export interface transaction{
     name:string;
     description:string;
     amount:string;
-    dateCreated: string;
+    dateCreated: Date;
 }
 
 

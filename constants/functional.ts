@@ -3,6 +3,7 @@ const incomeCategories = [
     'Sales / TurnOver',
     'Loan',
     'Gift',
+    'Luck',
     'Others'
 ]
 
