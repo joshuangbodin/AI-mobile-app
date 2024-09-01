@@ -5,6 +5,7 @@ import { vh, vw } from '@/helpers/responsivesizes'
 import { transactionList } from '@/types/app.t'
 import ListItem from './listItem'
 import { deleteFromList } from '@/appStorage/transactions/transactions'
+import { router } from 'expo-router'
 
 interface props {
   data?: transactionList;
@@ -52,6 +53,9 @@ const TransactionList = ({ data , isOpen , setIsOpen }: props) => {
             type={item.type}
             amount={item.amount}
             category={item.category}
+            onPress={()=>{
+              router.push({pathname:'/transactionDetails'  , params:{item: JSON.stringify(item)}})
+            }}
             onLongPress={()=>{
               setIsOpen()
               deleteFromList(item)

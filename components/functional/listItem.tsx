@@ -22,7 +22,7 @@ interface listprops {
 
 const ListItem = ({ name, description, amount, type, category, dateCreated, onLongPress, onPress }: listprops) => {
     return (
-        <TouchableOpacity style={style.container} onLongPress={onLongPress}>
+        <TouchableOpacity style={style.container} onLongPress={onLongPress} onPress={onPress}>
             {/* price and category */}
             <View style={{width:'50%', justifyContent:'space-around' , height:'100%'}}>
                 <View style={[style.amount]}>

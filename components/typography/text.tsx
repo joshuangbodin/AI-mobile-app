@@ -86,18 +86,19 @@ const styles = StyleSheet.create({
     text: {
         fontSize: vh(2),
         color: theme.gray.white,
-
+        textTransform:'capitalize'
     },
     headertext: {
         fontSize: vh(3.5),
         color: theme.gray.white,
-        fontWeight: 'bold'
-
+        fontWeight: 'bold',
+        textTransform:'capitalize'
     },
     supporting: {
         fontSize: vh(1.8),
         color: theme.gray.gray2,
-        fontWeight: '600'
+        fontWeight: '600',
+        textTransform:'capitalize'
     },
 
 })
