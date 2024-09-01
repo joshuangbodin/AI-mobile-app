@@ -12,6 +12,7 @@ import TransactionList from '@/components/functional/list'
 import NewEntryBtn from '@/components/functional/newEntryBtn'
 import { clearList, getListFromStorage } from '@/appStorage/transactions/transactions'
 import { getExpenseSummary } from '@/appStorage/transactions/Calculations'
+import { useLocalSearchParams } from 'expo-router'
 
 
 const home = () => {
@@ -20,8 +21,14 @@ const home = () => {
   const [transactionList , setTransationList] = useState<transactionList>()
   const [track , setTrack] = useState(0)
 
+  const {refresh} = useLocalSearchParams()
+
   // expenseSummary
   const [ expenseSummary , setExpenseSummary] = useState({income:0 , expenditure:0, savings:0})
+
+// REFRESH
+
+
 
   //initial render
   useEffect(()=>{
@@ -59,6 +66,12 @@ const home = () => {
       setTransationList(data.data)
     }
     
+  }
+
+  if(refresh){
+    initializeUserInfo()
+    initializeList()
+    initializeExpenseSummary()
   }
 
  const toggle = ()=>{

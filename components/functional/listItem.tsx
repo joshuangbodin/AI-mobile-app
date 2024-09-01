@@ -35,7 +35,7 @@ const ListItem = ({ name, description, amount, type, category, dateCreated, onLo
 
                 </View>
                 <View  style={[style.cate  , {backgroundColor:randomCategoryColorGenerator(category)}]}>
-                    <CustomText isSupporting style={{color:theme.gray.white}} size={vh(1.4)} text={category} />
+                    <CustomText isSupporting style={{color:theme.gray.white}} size={vh(1.2)} text={category} />
                 </View>
             </View>
 
@@ -83,7 +83,7 @@ const style = StyleSheet.create({
         borderRadius: theme.curves.full,
         minWidth:'50%',
         padding:1.5,
-        maxWidth:'75%'
+        maxWidth:'70%'
     }
 })
 
