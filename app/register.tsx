@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, Switch, KeyboardAvoidingView, Alert, ActivityIndicator } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Switch, KeyboardAvoidingView, Alert, ActivityIndicator, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import GoBackBtn from '@/components/ui/GoBackBtn'
@@ -31,7 +31,6 @@ const register = () => {
         const data = await retrieveUserData()
 
         if (data.success) {
-            console.log(data.data.appLock)
             if (data.data.appLock) {
                 setLoading(false)
                 router.push('/login')
@@ -44,7 +43,7 @@ const register = () => {
 
         }
         else {
-            console.log(data)
+            //console.log(data)
             setLoading(false)
         }
 
@@ -62,8 +61,8 @@ const register = () => {
         }
         else {
             setLoading(false)
-            console.log('error:', data.data)
-            Alert.alert('Registration Error', data.data)
+            //console.log('error:', data.data)
+           // Alert.alert('Registration Error', data.data)
         }
 
     }
@@ -71,9 +70,11 @@ const register = () => {
 
     return (
         <ScreenWrapper SafeArea>
-            <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={100} style={style.container}>
+            <ScrollView  contentContainerStyle={style.container}>
                 {/* Go Back Btn */}
                 <GoBackBtn />
+
+
                 {/* Greeting  */}
                 <View >
                     <CustomText isheader>
@@ -86,6 +87,8 @@ const register = () => {
                         Spending <Text style={style.designtext}>Today.</Text>
                     </CustomText>
                 </View>
+
+
                 {/* form */}
                 <View style={style.form}>
                     <CustomText style={{ alignSelf: 'flex-start' }} isSupporting text='Please provide the following information' />
@@ -125,9 +128,11 @@ const register = () => {
                     </View>
 
                 </View>
+
+
                 {/* submit btn */}
                 {loading ? <ActivityIndicator color={theme.primary.normal} /> : <CustomButton style={{ alignSelf: 'center' }} onPress={register} title='Register' />}
-            </KeyboardAvoidingView>
+            </ScrollView>
         </ScreenWrapper>
     )
 }

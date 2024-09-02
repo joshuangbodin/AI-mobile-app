@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React, { useState } from 'react'
+import { View,  StyleSheet } from 'react-native'
+import React from 'react'
 import { vh, vw } from '@/helpers/responsivesizes'
 import { theme } from '@/constants/theme'
 import CustomText from '../typography/text'

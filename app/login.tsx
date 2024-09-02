@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, Switch, KeyboardAvoidingView, Alert, ActivityIndicator, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Switch, KeyboardAvoidingView, Alert, ActivityIndicator, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import GoBackBtn from '@/components/ui/GoBackBtn'
@@ -38,11 +38,11 @@ const login = () => {
                 return;
             } else {
                 setLoading(false)
-                console.log(data.data)
+                //console.log(data.data)
             }
 
         } catch (err: any) {
-            console.log('error', err.message)
+            //console.log('error', err.message)
         }
 
     }
@@ -57,7 +57,7 @@ const login = () => {
 
     return (
         <ScreenWrapper SafeArea>
-            <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={100} style={style.container}>
+            <ScrollView contentContainerStyle={style.container}>
 
 
                 {/* Go Back Btn */}
@@ -140,7 +140,7 @@ const login = () => {
                     <CustomButton style={{ alignSelf: 'center' }} onPress={verify} title='Verify' />
                 }
 
-            </KeyboardAvoidingView>
+            </ScrollView>
         </ScreenWrapper>
     )
 }

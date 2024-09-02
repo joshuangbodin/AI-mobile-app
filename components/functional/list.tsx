@@ -1,11 +1,11 @@
 import { View, Image, FlatList } from 'react-native'
 import React from 'react'
 import CustomText from '../typography/text'
-import { vh, vw } from '@/helpers/responsivesizes'
+import { vw } from '@/helpers/responsivesizes'
 import { transactionList } from '@/types/app.t'
 import ListItem from './listItem'
 import { deleteFromList } from '@/appStorage/transactions/transactions'
-import { router } from 'expo-router'
+
 
 interface props {
   data?: transactionList;

@@ -10,17 +10,18 @@ const incomeColors = [
     "#3e5b4a",  // Darker green
     "#bfa85a",  // Duller yellow
     "#9aa5b8",  // Muted light blue
-    "#c25d5d"   // Darker red
+  
 
 
 ]
 const expenseColors = [
    "#8a7e6f",  // Muted beige
-  "#9ab3a3",  // Less bright teal
+  "purple",  // Less bright teal
   "#a87fdd",  // Softer purple
   "#4d1e6a",  // Darker violet
   "#d1a2a2",  // Subdued pink
-  "#3f7a6e"   // Less bright green
+  "#3f7a6e" ,
+  "#c25d5d"    // Less bright green
 ]
 
 

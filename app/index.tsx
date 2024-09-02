@@ -1,4 +1,4 @@
-import { View, Text , Image , StyleSheet, ImageBackground, TouchableOpacity} from 'react-native'
+import { View,  Image , StyleSheet} from 'react-native'
 import React from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import { theme } from '@/constants/theme'
@@ -24,11 +24,7 @@ const index = () => {
 
 
       {/* call to action button */}
-      <CustomButton title = {'Get Started' } onPress={()=>{router.push('/register')}}/>
-
-     
-     
-
+      <CustomButton title = {'Continue' } onPress={()=>{router.push('/register')}}/>
     </ScreenWrapper>
   )
 }

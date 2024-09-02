@@ -18,7 +18,7 @@ const CustomModal = ({
   setVisible,
   height,
   styles,
-  closeBtn
+  closeBtn,
 }: props) => {
   return (
     <View
@@ -27,14 +27,12 @@ const CustomModal = ({
         visible ? {} : style.hidden,
         styles && styles,
         height && { height },
+        closeBtn && { left: -4 },
       ]}
     >
-      
-        
-        <TouchableOpacity style={{ height: vh(3) }} onPress={setVisible}>
-          {closeBtn ? closeBtn() :<View style={style.btn}></View>}
-        </TouchableOpacity>
-      
+      <TouchableOpacity style={{ height: vh(3) }} onPress={setVisible}>
+        {closeBtn ? closeBtn() : <View style={style.btn}></View>}
+      </TouchableOpacity>
 
       {children}
     </View>

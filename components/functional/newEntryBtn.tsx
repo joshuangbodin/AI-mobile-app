@@ -1,18 +1,15 @@
 import {
   View,
-  Text,
   TouchableOpacity,
   StyleSheet,
   TextInput,
   FlatList,
-  KeyboardAvoidingView,
   ScrollView,
 } from "react-native";
 import React, { useState } from "react";
-import { Entypo, Feather, Ionicons } from "@expo/vector-icons";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import { theme } from "@/constants/theme";
 import { vh, vw } from "@/helpers/responsivesizes";
-import { router } from "expo-router";
 import CustomText from "../typography/text";
 import CustomButton from "../ui/button";
 import { categories } from "@/constants/functional";
@@ -51,20 +48,33 @@ const NewEntryBtn = ({ isOpen, setIsOpen }: props) => {
 
     await addToList(transaction);
     setTransaction({
-        name: "",
-        description: "",
-        amount: "",
-        type: "income",
-        category: "",
-        dateCreated: new Date(),
-      })
+      name: "",
+      description: "",
+      amount: "",
+      type: "income",
+      category: "",
+      dateCreated: new Date(),
+    });
     setIsOpen();
   };
 
   return (
     <View>
       {/* pop up */}
-      <CustomModal closeBtn={()=> <Feather style={{marginTop:10 , marginLeft:5}}  name="chevron-left" color={theme.gray.gray3} size={vh(3)}/>} visible={isOpen} styles={{left:0 , width:vw(100) , }} height={vh(95)} setVisible={setIsOpen}>
+      <CustomModal
+        closeBtn={() => (
+          <Feather
+            style={{ marginTop: 10, marginLeft: 5 }}
+            name="chevron-left"
+            color={theme.gray.gray3}
+            size={vh(3)}
+          />
+        )}
+        visible={isOpen}
+        styles={{ left: 0, width: vw(100) }}
+        height={vh(95)}
+        setVisible={setIsOpen}
+      >
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.form}
@@ -72,39 +82,39 @@ const NewEntryBtn = ({ isOpen, setIsOpen }: props) => {
           {/* form head */}
           <CustomText isSupporting size={vh(2.5)} text="New Entry" />
 
-          <View style={{gap:10}}>
-              {/* name */}
-              <TextInput
-                value={transaction.name}
-                onChangeText={(value) =>
-                  setTransaction({ ...transaction, name: value })
-                }
-                style={styles.formName}
-                placeholder=" Name"
-                placeholderTextColor={theme.gray.gray2}
-              />
-              {/* Amount */}
-              <TextInput
-                value={transaction.amount}
-                onChangeText={(value) =>
-                  setTransaction({ ...transaction, amount: value })
-                }
-                keyboardType="numeric"
-                style={styles.formName}
-                placeholder="$Amount"
-                placeholderTextColor={theme.gray.gray2}
-              />
-              {/* description */}
-              <TextInput
-                value={transaction.description}
-                onChangeText={(value) =>
-                  setTransaction({ ...transaction, description: value })
-                }
-                style={styles.formDescription}
-                multiline
-                placeholder="Description ..."
-                placeholderTextColor={theme.gray.gray2}
-              />
+          <View style={{ gap: 10 }}>
+            {/* name */}
+            <TextInput
+              value={transaction.name}
+              onChangeText={(value) =>
+                setTransaction({ ...transaction, name: value })
+              }
+              style={styles.formName}
+              placeholder=" Name"
+              placeholderTextColor={theme.gray.gray2}
+            />
+            {/* Amount */}
+            <TextInput
+              value={transaction.amount}
+              onChangeText={(value) =>
+                setTransaction({ ...transaction, amount: value })
+              }
+              keyboardType="numeric"
+              style={styles.formName}
+              placeholder="$Amount"
+              placeholderTextColor={theme.gray.gray2}
+            />
+            {/* description */}
+            <TextInput
+              value={transaction.description}
+              onChangeText={(value) =>
+                setTransaction({ ...transaction, description: value })
+              }
+              style={styles.formDescription}
+              multiline
+              placeholder="Description ..."
+              placeholderTextColor={theme.gray.gray2}
+            />
           </View>
 
           {/* type toggle */}
@@ -140,9 +150,7 @@ const NewEntryBtn = ({ isOpen, setIsOpen }: props) => {
 
           {/* category */}
           <View>
-            
             <FlatList
-              
               data={
                 transaction.type == "expenditure"
                   ? categories.expense
@@ -180,8 +188,6 @@ const NewEntryBtn = ({ isOpen, setIsOpen }: props) => {
           />
         </ScrollView>
       </CustomModal>
-
-
 
       <View style={styles.cont}>
         {/* button */}
@@ -227,10 +233,10 @@ const styles = StyleSheet.create({
   },
   //form
   form: {
-    padding:10,
+    padding: 10,
     width: "100%",
     justifyContent: "space-between",
-    paddingVertical:20,
+    paddingVertical: 20,
     height: "100%",
   },
   formName: {
@@ -238,16 +244,16 @@ const styles = StyleSheet.create({
     fontSize: vh(2.2),
     height: vh(4.5),
     borderRadius: theme.curves.md,
-    paddingHorizontal:10,
+    paddingHorizontal: 10,
     backgroundColor: theme.primary.alt,
-    color: theme.gray.gray4
+    color: theme.gray.gray4,
   },
 
   formDescription: {
     fontSize: vh(2.2),
     height: vh(8),
     borderRadius: theme.curves.md,
-    paddingHorizontal:10,
+    paddingHorizontal: 10,
     color: theme.gray.gray4,
     backgroundColor: theme.primary.alt,
   },
@@ -261,7 +267,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   typeCategory: {
-    width: '50%',
+    width: "50%",
     padding: 3,
     justifyContent: "center",
     alignItems: "center",

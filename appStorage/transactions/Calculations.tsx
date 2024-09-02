@@ -9,7 +9,7 @@ export const getExpenseSummary = async ()=>{
 
     if(success){
         const temp:transactionList = data
-        console.log(temp)
+       
 
         temp.list.forEach(
             (transactions:transaction) =>{

@@ -340,7 +340,8 @@ const style = StyleSheet.create({
   },
 
   modalName:{
-    width:'50%'
+    width:'50%',
+    gap:5
   },
 
   cateCont:{

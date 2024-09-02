@@ -1,10 +1,9 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
 
 import CustomText from '../typography/text'
 import { formatCurrency } from '@/helpers/pricecustomization';
-import { vh, vw } from '@/helpers/responsivesizes';
-import { Feather } from '@expo/vector-icons';
+import { vh } from '@/helpers/responsivesizes';
 import { theme } from '@/constants/theme';
 import { randomCategoryColorGenerator } from '@/helpers/RandomGenerator';
 
