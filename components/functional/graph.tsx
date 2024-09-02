@@ -1,9 +1,10 @@
 import { View, StyleSheet} from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import CustomText from '../typography/text'
 import { LinearGradient } from 'expo-linear-gradient'
 import { theme } from '@/constants/theme'
 import { vh, vw } from '@/helpers/responsivesizes'
+import { getPercentageSummary } from '@/appStorage/transactions/Calculations'
 
 interface BarProps{
     name:string;
@@ -12,12 +13,33 @@ interface BarProps{
 
 
 const Graph = () => {
+    const [percentageSummary,setPercentageSummary] = useState({
+        incomePercentage:0,
+        expensePercentage:0,
+        savingsPercentage:0,
+        lossPercentage:0
+    })
+
+
+
+    useEffect(()=>{
+        retrieve()
+    },[])
+
+    const retrieve = async()=>{
+        const data = await getPercentageSummary()
+
+        if(data){
+            setPercentageSummary(data)
+        }
+        
+    }
   return (
     <View style={style.chartCont}>
-        <Bar name='income' percentage={100}/>
-        <Bar name='Savings' percentage={30.4}/>
-        <Bar name='Expense' percentage={69.6}/>
-        <Bar name='Loss' percentage={0}/>
+        <Bar name='income' percentage={percentageSummary.incomePercentage}/>
+        <Bar name='Savings' percentage={percentageSummary.savingsPercentage}/>
+        <Bar name='Expense' percentage={percentageSummary.expensePercentage}/>
+        <Bar name='Loss' percentage={percentageSummary.lossPercentage}/>
     </View>
   )
 }
@@ -41,6 +63,11 @@ const Bar = ({name , percentage}:BarProps)=>{
     }
     return (
         <View style={style.barCont}>
+        <View>
+            <CustomText size={vh(1.6)}>
+                {percentage.toFixed(1)}%
+            </CustomText>
+        </View>
         <View>
             <LinearGradient
             colors={[theme.primary.normal , theme.primary.purple]}
