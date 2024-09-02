@@ -1,247 +1,273 @@
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, FlatList, KeyboardAvoidingView } from 'react-native'
-import React, { useState } from 'react'
-import { Entypo, Feather, Ionicons } from '@expo/vector-icons'
-import { theme } from '@/constants/theme'
-import { vh, vw } from '@/helpers/responsivesizes'
-import { router } from 'expo-router'
-import CustomText from '../typography/text'
-import CustomButton from '../ui/button'
-import { categories } from '@/constants/functional'
-import { transaction } from '@/types/app.t'
-import { addToList } from '@/appStorage/transactions/transactions'
-import { LinearGradient } from 'expo-linear-gradient'
-
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  TextInput,
+  FlatList,
+  KeyboardAvoidingView,
+  ScrollView,
+} from "react-native";
+import React, { useState } from "react";
+import { Entypo, Feather, Ionicons } from "@expo/vector-icons";
+import { theme } from "@/constants/theme";
+import { vh, vw } from "@/helpers/responsivesizes";
+import { router } from "expo-router";
+import CustomText from "../typography/text";
+import CustomButton from "../ui/button";
+import { categories } from "@/constants/functional";
+import { transaction } from "@/types/app.t";
+import { addToList } from "@/appStorage/transactions/transactions";
+import { LinearGradient } from "expo-linear-gradient";
+import CustomModal from "../modal/CustomModal";
 
 interface props {
-    isOpen:boolean;
-    setIsOpen: ()=>void;
+  isOpen: boolean;
+  setIsOpen: () => void;
 }
 
+const NewEntryBtn = ({ isOpen, setIsOpen }: props) => {
+  const [transaction, setTransaction] = useState<transaction>({
+    name: "",
+    description: "",
+    amount: "",
+    type: "income",
+    category: "",
+    dateCreated: new Date(),
+  });
 
-const NewEntryBtn = ({isOpen , setIsOpen}:props) => {
+  const createEntry = async () => {
+    const { name, description, amount, type, category } = transaction;
 
-
-    
-
-    const [transaction, setTransaction] = useState<transaction>({
-        name: '',
-        description: '',
-        amount: '',
-        type: 'income',
-        category: '',
-        dateCreated: new Date
-    })
-
-
-    const createEntry = async() =>{
-        const {name , description , amount, type,category} = transaction
-
-        if(!name || !description || !amount || !type || !category){
-            console.log('provide all the useful infomation')
-            return;
-        }
-
-        if(Number.isNaN(Number(amount))){
-            console.log('amount is not a number')
-            return;
-        }
-
-
-
-
-        await addToList(transaction)
-        setIsOpen()
+    if (!name || !description || !amount || !type || !category) {
+      console.log("provide all the useful infomation");
+      return;
     }
 
-    return (
-        <View style={styles.cont}>
-            {/* pop up */}
-            {isOpen &&
-                <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={100} style={styles.form}>
-                    {/* form head */}
-                    <CustomText isSupporting size={vh(2.5)} text='New Entry' />
+    if (Number.isNaN(Number(amount))) {
+      console.log("amount is not a number");
+      return;
+    }
 
-                    {/* name */}
-                    <TextInput
-                        value={transaction.name}
-                        onChangeText={(value)=> setTransaction({...transaction, name:value})}
-                        style={styles.formName}
-                        placeholder='Transaction Name'
-                        placeholderTextColor={theme.gray.gray2}
-                    />
+    await addToList(transaction);
+    setIsOpen();
+  };
 
-                    {/* Amount */}
-                    <TextInput
-                        value={transaction.amount}
-                        onChangeText={(value)=> setTransaction({...transaction, amount:value})}
-                        keyboardType='numeric'
-                        style={styles.formDescription}
-                        placeholder='Amount ...'
-                        multiline
-                        placeholderTextColor={theme.gray.gray2}
-                    />
+  return (
+    <View>
+      {/* pop up */}
+      <CustomModal closeBtn={()=> <Feather style={{marginTop:10 , marginLeft:5}}  name="chevron-left" color={theme.gray.gray3} size={vh(3)}/>} visible={isOpen} styles={{left:0}} height={vh(95)} setVisible={setIsOpen}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.form}
+        >
+          {/* form head */}
+          <CustomText isSupporting size={vh(2.5)} text="New Entry" />
 
-                    {/* description */}
-                    <TextInput
-                        value={transaction.description}
-                        onChangeText={(value)=> setTransaction({...transaction, description:value})}
-                        style={styles.formDescription}
-                        placeholder='Description ...'
-                        multiline
-                        placeholderTextColor={theme.gray.gray2}
-                    />
+          <View style={{gap:10}}>
+              {/* name */}
+              <TextInput
+                value={transaction.name}
+                onChangeText={(value) =>
+                  setTransaction({ ...transaction, name: value })
+                }
+                style={styles.formName}
+                placeholder=" Name"
+                placeholderTextColor={theme.gray.gray2}
+              />
+              {/* Amount */}
+              <TextInput
+                value={transaction.amount}
+                onChangeText={(value) =>
+                  setTransaction({ ...transaction, amount: value })
+                }
+                keyboardType="numeric"
+                style={styles.formName}
+                placeholder="$Amount"
+                placeholderTextColor={theme.gray.gray2}
+              />
+              {/* description */}
+              <TextInput
+                value={transaction.description}
+                onChangeText={(value) =>
+                  setTransaction({ ...transaction, description: value })
+                }
+                style={styles.formDescription}
+                multiline
+                placeholder="Description ..."
+                placeholderTextColor={theme.gray.gray2}
+              />
+          </View>
 
-                    {/* type toggle */}
-                    <View style={styles.type}>
-
-                        <TouchableOpacity
-                            onPress = {()=>{setTransaction({...transaction , type:'income'})}}
-                            style={[
-                                styles.typeCategory,
-                                transaction.type == 'income' &&
-                                {
-                                    backgroundColor: theme.primary.darker
-                                }]}>
-
-                            <CustomText text='Income'></CustomText>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                            onPress = {()=>{setTransaction({...transaction , type:'expenditure'})}}
-                            style={[
-                                styles.typeCategory,
-                                transaction.type == 'expenditure' &&
-                                {
-                                    backgroundColor: theme.primary.darker
-                                }]}>
-
-                           
-                            <CustomText text='expenditure'></CustomText>
-                        </TouchableOpacity>
-
-                    </View>
-
-                    {/* category */}
-                    <View>
-                        <CustomText text='categories:' isSupporting />
-                        <FlatList
-                            horizontal
-                            data={transaction.type == 'expenditure' ?categories.expense: categories.income}
-                            renderItem={({ item }) =>
-                            (<TouchableOpacity
-                            onPress={()=> {setTransaction({...transaction,category:item})}}
-                             style={[styles.categotyCard , transaction.category == item&&{backgroundColor: theme.primary.darker}]}>
-                                <CustomText text={item} />
-                            </TouchableOpacity>)
-                            }
-                            style={{ marginTop: 5 } } 
-                            contentContainerStyle={{
-                                gap: 5
-                            }}
-                        />
-                    </View>
-
-
-
-                    {/* button */}
-                    <CustomButton 
-                    textstyle={{ fontWeight: '500', fontSize: vh(2) }} 
-                    isFullWidth={false} 
-                    style={{ height: vh(6) }} 
-                    onPress={createEntry} 
-                    title='Create Entry' />
-                </KeyboardAvoidingView>}
-
-            {/* button */}
-            <TouchableOpacity onPress={setIsOpen}>
-                <LinearGradient
-                colors={[theme.primary.deep, theme.primary.purple, theme.primary.dark,]}
-                style={styles.btn}
-                start={{ x: 0, y: 1 }}
-                end={{ x: 1, y: -2 }}
-                >
-                    <Ionicons size={vh(4.5)} color={theme.gray.white} name={isOpen ? 'close-outline' : 'add'} />
-                </LinearGradient>
+          {/* type toggle */}
+          <View style={styles.type}>
+            <TouchableOpacity
+              onPress={() => {
+                setTransaction({ ...transaction, type: "income" });
+              }}
+              style={[
+                styles.typeCategory,
+                transaction.type == "income" && {
+                  backgroundColor: theme.primary.darker,
+                },
+              ]}
+            >
+              <CustomText text="Income"></CustomText>
             </TouchableOpacity>
 
+            <TouchableOpacity
+              onPress={() => {
+                setTransaction({ ...transaction, type: "expenditure" });
+              }}
+              style={[
+                styles.typeCategory,
+                transaction.type == "expenditure" && {
+                  backgroundColor: theme.primary.darker,
+                },
+              ]}
+            >
+              <CustomText text="expenditure"></CustomText>
+            </TouchableOpacity>
+          </View>
 
-        </View>
-    )
-}
+          {/* category */}
+          <View>
+            
+            <FlatList
+              
+              data={
+                transaction.type == "expenditure"
+                  ? categories.expense
+                  : categories.income
+              }
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => {
+                    setTransaction({ ...transaction, category: item });
+                  }}
+                  style={[
+                    styles.categotyCard,
+                    transaction.category == item && {
+                      backgroundColor: theme.primary.darker,
+                    },
+                  ]}
+                >
+                  <CustomText text={item} />
+                </TouchableOpacity>
+              )}
+              style={{ marginTop: 5 }}
+              contentContainerStyle={{
+                gap: 5,
+              }}
+            />
+          </View>
+
+          {/* button */}
+          <CustomButton
+            textstyle={{ fontWeight: "500", fontSize: vh(2) }}
+            isFullWidth={false}
+            style={{ height: vh(6) }}
+            onPress={createEntry}
+            title="Create Entry"
+          />
+        </ScrollView>
+      </CustomModal>
+
+
+
+      <View style={styles.cont}>
+        {/* button */}
+        {!isOpen && (
+          <TouchableOpacity onPress={setIsOpen}>
+            <LinearGradient
+              colors={[
+                theme.primary.deep,
+                theme.primary.purple,
+                theme.primary.dark,
+              ]}
+              style={styles.btn}
+              start={{ x: 0, y: 1 }}
+              end={{ x: 1, y: -2 }}
+            >
+              <Ionicons
+                size={vh(4.5)}
+                color={theme.gray.white}
+                name={isOpen ? "close-outline" : "add"}
+              />
+            </LinearGradient>
+          </TouchableOpacity>
+        )}
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    cont: {
-        position: 'absolute',
-        bottom: vh(3.5),
-        right: 4,
-        gap: 10,
-    },
-    btn: {
+  cont: {
+    position: "absolute",
+    bottom: vh(3.5),
+    right: 4,
+    gap: 10,
+  },
+  btn: {
+    width: vw(15),
+    height: vw(15),
+    backgroundColor: theme.primary.normal,
+    borderRadius: theme.curves.full,
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "flex-end",
+  },
+  //form
+  form: {
+    padding:10,
+    width: "100%",
+    justifyContent: "space-between",
+    paddingVertical:20,
+    height: "100%",
+  },
+  formName: {
+    width: "100%",
+    fontSize: vh(2.2),
+    height: vh(4.5),
+    borderRadius: theme.curves.md,
+    paddingHorizontal:10,
+    backgroundColor: theme.primary.alt,
+    color: theme.gray.gray4
+  },
 
-        width: vw(15),
-        height: vw(15),
-        backgroundColor: theme.primary.normal,
-        borderRadius: theme.curves.full,
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'flex-end',
-    },
-    //form
-    form: {
-        position: 'relative',
-        width: vw(94),
-        minHeight: vh(70),
-        backgroundColor: theme.primary.dark,
-        alignSelf: 'flex-end',
-        right: 0,
-        borderRadius: 30,
-        padding: 15,
-        justifyContent: 'space-between',
-        paddingVertical: 20,
-    },
-    formName: {
-        width: '100%',
-        fontSize: vh(2.2),
-        height: vh(4.5),
-        borderBottomWidth: 1,
-        borderBottomColor: theme.gray.gray3,
-        color: theme.gray.gray3
-    },
+  formDescription: {
+    fontSize: vh(2.2),
+    height: vh(8),
+    borderRadius: theme.curves.md,
+    paddingHorizontal:10,
+    color: theme.gray.gray4,
+    backgroundColor: theme.primary.alt,
+  },
 
-    formDescription: {
-        fontSize: vh(2.2),
-        height: vh(4.5),
-        borderBottomWidth: 1,
-        borderBottomColor: theme.gray.gray3,
-        color: theme.gray.gray3
-    },
-
-    type: {
-        flexDirection: 'row',
-        backgroundColor: theme.primary.alt,
-        height: vh(5),
-        borderRadius: theme.curves.md,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    typeCategory: {
-        width: vw(40),
-        padding: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: theme.curves.sm
-    }
-    ,
-
-    //list
-    categotyCard: {
-        backgroundColor: theme.primary.alt,
-        height: vh(5),
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 5,
-        borderRadius: theme.curves.md
-    }
-
-})
-export default NewEntryBtn
+  type: {
+    flexDirection: "row",
+    backgroundColor: theme.primary.alt,
+    height: vh(3),
+    borderRadius: theme.curves.md,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  typeCategory: {
+    width: '50%',
+    padding: 3,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: theme.curves.sm,
+  },
+  //list
+  categotyCard: {
+    backgroundColor: theme.primary.alt,
+    height: vh(4.3),
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 5,
+    borderRadius: theme.curves.md,
+  },
+});
+export default NewEntryBtn;

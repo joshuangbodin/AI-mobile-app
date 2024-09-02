@@ -10,9 +10,11 @@ import { theme } from "@/constants/theme";
 import ExpenseBoard from "@/components/functional/expenseBoard";
 import TransactionList from "@/components/functional/list";
 import NewEntryBtn from "@/components/functional/newEntryBtn";
-import { getListFromStorage } from "@/appStorage/transactions/transactions";
+import { deleteFromList, getListFromStorage } from "@/appStorage/transactions/transactions";
 import { getExpenseSummary } from "@/appStorage/transactions/Calculations";
 import CustomModal from "@/components/modal/CustomModal";
+import { formatCurrency } from "@/helpers/pricecustomization";
+import { randomCategoryColorGenerator } from "@/helpers/RandomGenerator";
 
 const home = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -34,7 +36,7 @@ const home = () => {
     initializeUserInfo();
     initializeList();
     initializeExpenseSummary();
-  }, [isOpen, track]);
+  }, [isOpen, track , isVisible]);
 
   const initializeUserInfo = async () => {
     const data = await retrieveUserData();
@@ -68,6 +70,17 @@ const home = () => {
   const increment = () => {
     setTrack(track + 1);
   };
+
+  const deleteHandler = async() => {
+    if(!selectedTransaction){
+      return
+    }
+    await deleteFromList(selectedTransaction);
+    setSelectedTransaction(undefined);
+    setIsVisible(false);
+
+    return
+  }
 
   const isSelected = (index: number) => {
     setIsVisible(true);
@@ -197,27 +210,47 @@ const home = () => {
         }}
         visible={isVisible}
       >
+        {/* view transaction */}
         {selectedTransaction ? (
-          <ScrollView>
-            <View>
-              <View>
-                <CustomText isheader>{selectedTransaction.name}</CustomText>
-                <CustomText isSupporting>
-                  {String(selectedTransaction.dateCreated)}
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ gap: 15 }}
+          >
+            {/* name , amount , date */}
+            <View style={style.modalTopView}>
+              <View style={style.modalName}>
+                <CustomText size={vh(3)} isheader>{selectedTransaction.name}</CustomText>
+                <CustomText size={vh(1.3)} isSupporting>
+                  {String(selectedTransaction.dateCreated).slice(0,21)}
                 </CustomText>
               </View>
-              <CustomText>{selectedTransaction.amount}</CustomText>
+              <CustomText isheader size={vh(2.7)}>{formatCurrency(Number(selectedTransaction.amount) , true)}</CustomText>
             </View>
 
-            <View>
-              <View><CustomText>{selectedTransaction.category}</CustomText></View>
-              <View><CustomText>{selectedTransaction.type}</CustomText></View>
+            {/* category and type */}
+            <View style={style.cateCont}>
+              <View style={[style.cateBtn , {backgroundColor: randomCategoryColorGenerator(selectedTransaction.category)}]}>
+                <CustomText size={vh(1.7)}>{selectedTransaction.category}</CustomText>
+              </View>
+              <View style={style.cateBtn}>
+                <CustomText  size={vh(1.7)}>{selectedTransaction.type}</CustomText>
+              </View>
             </View>
 
-            <View>
-              <CustomText>
-                {selectedTransaction.description}
-              </CustomText>
+            {/* description */}
+            <CustomText size={vh(1.6)} isSupporting>description:</CustomText>
+            <View style={style.desc}>
+              <CustomText isSupporting >{selectedTransaction.description}</CustomText>
+            </View>
+
+            {/* buttons */}
+            <View style={style.btnContainer}>
+              <TouchableOpacity style={style.btn}>
+                <FontAwesome6 name='pen' color={theme.gray.gray3} size={vh(2.4)}/>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={deleteHandler} style={style.btn}>
+                <FontAwesome6 name='trash-alt' color={'red'} size={vh(2.4)}/>
+              </TouchableOpacity>
             </View>
           </ScrollView>
         ) : (
@@ -285,6 +318,56 @@ const style = StyleSheet.create({
     minHeight: vh(58),
     alignSelf: "center",
   },
+
+  // modal
+
+  modalTopView:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+  },
+
+  modalName:{
+    width:'50%'
+  },
+
+  cateCont:{
+    flexDirection:'row',
+    gap:5,
+    marginBottom:30,
+  },
+
+  cateBtn:{
+    backgroundColor: theme.primary.darker,
+    padding:3,
+    justifyContent:'center',
+    alignItems:'center',
+    paddingHorizontal:20,
+    borderRadius: theme.curves.sm
+  },
+
+  desc:{
+    backgroundColor:theme.primary.darker,
+    padding:10,
+    height:vh(20),
+    borderRadius: theme.curves.lg
+  },
+
+  btnContainer:{
+    flexDirection:'row',
+    gap:5,
+    justifyContent:'flex-end',
+    alignItems:'center'
+  },
+
+  btn:{
+    width: vw(12),
+    height:vh(4),
+    backgroundColor: theme.primary.darker,
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius: theme.curves.md
+  }
 });
 
 export default home;

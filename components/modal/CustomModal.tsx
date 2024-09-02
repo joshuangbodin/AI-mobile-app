@@ -7,14 +7,35 @@ interface props {
   visible: boolean;
   children?: ReactNode;
   setVisible: () => void;
+  styles?: any;
+  height?: number;
+  closeBtn?: () => ReactNode;
 }
 
-const CustomModal = ({ visible, children , setVisible}: props) => {
+const CustomModal = ({
+  visible,
+  children,
+  setVisible,
+  height,
+  styles,
+  closeBtn
+}: props) => {
   return (
-    <View style={[style.container, visible ? {} : style.hidden]}>
-      <TouchableOpacity style={{height:vh(5)}}  onPress={setVisible} >
-        <View style={style.btn}></View>
-      </TouchableOpacity>
+    <View
+      style={[
+        style.container,
+        visible ? {} : style.hidden,
+        styles && styles,
+        height && { height },
+      ]}
+    >
+      
+        
+        <TouchableOpacity style={{ height: vh(3) }} onPress={setVisible}>
+          {closeBtn ? closeBtn() :<View style={style.btn}></View>}
+        </TouchableOpacity>
+      
+
       {children}
     </View>
   );
@@ -31,7 +52,7 @@ const style = StyleSheet.create({
     height: vh(70),
     backgroundColor: theme.primary.dark,
     left: 0,
-    bottom: -10,
+    bottom: 0,
     borderRadius: theme.curves.xxl,
     padding: 10,
   },
