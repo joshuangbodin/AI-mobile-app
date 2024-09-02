@@ -15,6 +15,8 @@ import { getExpenseSummary } from "@/appStorage/transactions/Calculations";
 import CustomModal from "@/components/modal/CustomModal";
 import { formatCurrency } from "@/helpers/pricecustomization";
 import { randomCategoryColorGenerator } from "@/helpers/RandomGenerator";
+import { router } from "expo-router";
+import settings from "./settings";
 
 const home = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -102,9 +104,9 @@ const home = () => {
           )}
         </View>
 
-        {/* delete user button */}
+        {/* setting */}
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>router.push('/settings')}>
           <FontAwesome6
             name="bars-staggered"
             size={vh(3.4)}
@@ -130,7 +132,7 @@ const home = () => {
         contentContainerStyle={style.action}
       >
         {/* button 1 */}
-        <TouchableOpacity style={style.actionbtn}>
+        <TouchableOpacity onPress={()=>router.push('/analytics')} style={style.actionbtn}>
           <FontAwesome6
             color={theme.gray.gray2}
             size={vh(1.8)}
