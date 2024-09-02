@@ -50,13 +50,21 @@ const NewEntryBtn = ({ isOpen, setIsOpen }: props) => {
     }
 
     await addToList(transaction);
+    setTransaction({
+        name: "",
+        description: "",
+        amount: "",
+        type: "income",
+        category: "",
+        dateCreated: new Date(),
+      })
     setIsOpen();
   };
 
   return (
     <View>
       {/* pop up */}
-      <CustomModal closeBtn={()=> <Feather style={{marginTop:10 , marginLeft:5}}  name="chevron-left" color={theme.gray.gray3} size={vh(3)}/>} visible={isOpen} styles={{left:0}} height={vh(95)} setVisible={setIsOpen}>
+      <CustomModal closeBtn={()=> <Feather style={{marginTop:10 , marginLeft:5}}  name="chevron-left" color={theme.gray.gray3} size={vh(3)}/>} visible={isOpen} styles={{left:0 , width:vw(100) , }} height={vh(95)} setVisible={setIsOpen}>
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.form}
@@ -212,7 +220,6 @@ const styles = StyleSheet.create({
   btn: {
     width: vw(15),
     height: vw(15),
-    backgroundColor: theme.primary.normal,
     borderRadius: theme.curves.full,
     justifyContent: "center",
     alignItems: "center",

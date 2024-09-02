@@ -1,4 +1,4 @@
-import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { View, StyleSheet, TouchableOpacity, ScrollView, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import CustomText from "@/components/typography/text";
@@ -240,21 +240,33 @@ const home = () => {
             {/* description */}
             <CustomText size={vh(1.6)} isSupporting>description:</CustomText>
             <View style={style.desc}>
-              <CustomText isSupporting >{selectedTransaction.description}</CustomText>
+              <CustomText  >{selectedTransaction.description}</CustomText>
             </View>
 
             {/* buttons */}
             <View style={style.btnContainer}>
-              <TouchableOpacity style={style.btn}>
-                <FontAwesome6 name='pen' color={theme.gray.gray3} size={vh(2.4)}/>
-              </TouchableOpacity>
+              
               <TouchableOpacity onPress={deleteHandler} style={style.btn}>
                 <FontAwesome6 name='trash-alt' color={'red'} size={vh(2.4)}/>
               </TouchableOpacity>
             </View>
           </ScrollView>
         ) : (
-          <View></View>
+          <View style={{
+            flex:1,
+            justifyContent:'center',
+            alignItems:'center',
+            minHeight: 300,
+          }}>
+            <Image 
+            
+            style={{
+              width: vw(30),
+              height: vw(30)
+            }} 
+            source={require('../assets/images/empty.png')}/>
+            <CustomText isSupporting>No Transaction Selected</CustomText>
+          </View>
         )}
       </CustomModal>
     </ScreenWrapper>
@@ -361,8 +373,8 @@ const style = StyleSheet.create({
   },
 
   btn:{
-    width: vw(12),
-    height:vh(4),
+    width: vw(20),
+    height:vh(5),
     backgroundColor: theme.primary.darker,
     justifyContent:'center',
     alignItems:'center',

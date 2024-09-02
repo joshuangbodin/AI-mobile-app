@@ -42,7 +42,7 @@ const ListItem = ({ name, description, amount, type, category, dateCreated, onLo
             {/* other info */}
             <View style={{width:'50%' , justifyContent:'space-around',height:'100%'}}>
                 <CustomText style={{fontWeight:'700'}} text={name} />
-                <CustomText size={vh(1.8)} text={description} />
+                <CustomText size={vh(1.7)} text={description.length>20? description.slice(0,20)+'...' : description} />
                 <CustomText isSupporting text={String(dateCreated).slice(0,10)} />
             </View>
         </TouchableOpacity>

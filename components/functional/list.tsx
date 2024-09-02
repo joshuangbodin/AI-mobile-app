@@ -26,12 +26,21 @@ const TransactionList = ({ data , isOpen , setIsOpen , setIsSelected}: props) =>
         }
 
         ListEmptyComponent={
-          <CustomText
-            isCentered
-            isSupporting
-            style={{ paddingTop: vh(20) }}
-            text='No Transaction yet'
-          />}
+          <View style={{
+            flex:1,
+            justifyContent:'center',
+            alignItems:'center',
+            minHeight: 300,
+          }}>
+            <Image 
+            
+            style={{
+              width: vw(30),
+              height: vw(30)
+            }} 
+            source={require('../../assets/images/empty.png')}/>
+            <CustomText isSupporting>No Transaction Yet</CustomText>
+          </View>}
 
 
         style={{

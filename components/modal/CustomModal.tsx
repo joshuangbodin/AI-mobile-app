@@ -50,7 +50,7 @@ const style = StyleSheet.create({
     position: "absolute",
     width: vw(100),
     height: vh(70),
-    backgroundColor: theme.primary.dark,
+    backgroundColor: theme.primary.black,
     left: 0,
     bottom: 0,
     borderRadius: theme.curves.xxl,

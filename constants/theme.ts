@@ -5,7 +5,7 @@ export const theme = {
         deep: '#022879',
         dark: '#191919',
         darker:'#000000',
-        black:'#070707',
+        black:'#181818',
         alt:'#4a4949',
         purple: '#543cab'
     },
