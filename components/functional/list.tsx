@@ -11,9 +11,10 @@ interface props {
   data?: transactionList;
   isOpen: number;
   setIsOpen: ()=> void;
+  setIsSelected: (index:number)=>void;
 }
 
-const TransactionList = ({ data , isOpen , setIsOpen }: props) => {
+const TransactionList = ({ data , isOpen , setIsOpen , setIsSelected}: props) => {
   if (!data) {
     return (
       <FlatList
@@ -45,7 +46,7 @@ const TransactionList = ({ data , isOpen , setIsOpen }: props) => {
       data={data.list}
 
       renderItem={
-        ({ item }) =>
+        ({ item , index }) =>
           <ListItem
             name={item.name}
             description={item.description}
@@ -53,9 +54,7 @@ const TransactionList = ({ data , isOpen , setIsOpen }: props) => {
             type={item.type}
             amount={item.amount}
             category={item.category}
-            onPress={()=>{
-              router.push({pathname:'/transactionDetails'  , params:{item: JSON.stringify(item)}})
-            }}
+            onPress={()=>{setIsSelected(index)}}
             onLongPress={()=>{
               setIsOpen()
               deleteFromList(item)
