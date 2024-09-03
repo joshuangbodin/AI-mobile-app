@@ -9,13 +9,14 @@ interface props {
   data: string | number;
   units: string;
   height?: number;
+  textSize?:number;
 }
 
-const statcard = ({ info, data, units, height }: props) => {
+const statcard = ({ info, data, units, height ,textSize }: props) => {
   return (
-    <View style={[styles.container, height ? { height } : { height: vh(20) }]}>
+    <View style={[styles.container, height ? { height } : { height: vh(20) },]}>
       <CustomText isSupporting>{info}</CustomText>
-      <CustomText isheader>{data}</CustomText>
+      <CustomText size={textSize&&textSize} isheader>{data}</CustomText>
       <CustomText isSupporting>{units}</CustomText>
     </View>
   );
@@ -29,7 +30,8 @@ const styles = StyleSheet.create({
     height: vh(20),
     backgroundColor: theme.primary.dark,
     borderRadius: theme.curves.xl,
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     padding: 10,
+    paddingVertical:vh(3)
   },
 });
