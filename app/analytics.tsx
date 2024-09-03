@@ -17,7 +17,7 @@ const analytics = () => {
       </View>
 
       {/* DashBoard */}
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{gap:10}}>
         {/* Graph */}
         <View>
           
@@ -43,6 +43,7 @@ const style = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     gap: 10,
+    height:vh(7)
   },
 });
 

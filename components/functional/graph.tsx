@@ -36,7 +36,7 @@ const Graph = () => {
         
     }
   return (
-    <View style={{height:vh(45) , justifyContent:'center', alignItems:'center' , gap:10}}>
+    <View style={{height:vh(40) , justifyContent:'center', alignItems:'center' , gap:10}}>
         <CustomText isSupporting >IE Graph</CustomText>
         <View style={style.chartCont}>
             <Bar name='income' percentage={percentageSummary.incomePercentage}/>
