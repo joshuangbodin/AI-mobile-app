@@ -16,7 +16,7 @@ const statcard = ({ info, data, units, height ,textSize }: props) => {
   return (
     <View style={[styles.container, height ? { height } : { height: vh(20) },]}>
       <CustomText isSupporting>{info}</CustomText>
-      <CustomText size={textSize&&textSize} isheader>{data}</CustomText>
+      <CustomText size={textSize&&textSize} isheader>{data?data:'...'}</CustomText>
       <CustomText isSupporting>{units}</CustomText>
     </View>
   );
