@@ -17,8 +17,8 @@ const index = () => {
       {/* logo & motto */}
       <View>
         <CustomText isCentered isheader text='Budget Boy.'/>
-        <CustomText isCentered isSupporting text='track your expenses seamlessly.'/>
-        <CustomText isCentered isSupporting text='take notes of income vs expenditure.'/>
+        <CustomText isCentered size={vh(1.8)} isSupporting text='track your expenses seamlessly.'/>
+        <CustomText isCentered size={vh(1.8)} isSupporting text='take notes of income vs expenditure.'/>
       </View>
 
 

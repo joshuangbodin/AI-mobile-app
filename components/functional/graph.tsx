@@ -9,6 +9,7 @@ import { getPercentageSummary } from '@/appStorage/transactions/Calculations'
 interface BarProps{
     name:string;
     percentage: number;
+    showNumber?: boolean;
 }
 
 
@@ -35,16 +36,19 @@ const Graph = () => {
         
     }
   return (
-    <View style={style.chartCont}>
-        <Bar name='income' percentage={percentageSummary.incomePercentage}/>
-        <Bar name='Savings' percentage={percentageSummary.savingsPercentage}/>
-        <Bar name='Expense' percentage={percentageSummary.expensePercentage}/>
-        <Bar name='Loss' percentage={percentageSummary.lossPercentage}/>
+    <View style={{height:vh(45) , justifyContent:'center', alignItems:'center' , gap:10}}>
+        <CustomText isSupporting >IE Graph</CustomText>
+        <View style={style.chartCont}>
+            <Bar name='income' percentage={percentageSummary.incomePercentage}/>
+            <Bar name='Savings' showNumber percentage={percentageSummary.savingsPercentage}/>
+            <Bar name='Expense' percentage={percentageSummary.expensePercentage}/>
+            <Bar name='Loss' percentage={percentageSummary.lossPercentage}/>
+        </View>
     </View>
   )
 }
 
-const Bar = ({name , percentage}:BarProps)=>{
+const Bar = ({name , percentage , showNumber=false}:BarProps)=>{
 
     function getValueByPercentage(percentage:number){
         const total = vh(20)
@@ -63,11 +67,11 @@ const Bar = ({name , percentage}:BarProps)=>{
     }
     return (
         <View style={style.barCont}>
-        <View>
+        {<View style={{backgroundColor:theme.primary.normal , padding:5 , borderRadius:theme.curves.full, width:vw(11) , justifyContent:'center' , alignItems:'center'}}>
             <CustomText size={vh(1.6)}>
-                {percentage.toFixed(1)}%
+                {percentage.toFixed(0)}%
             </CustomText>
-        </View>
+        </View>}
         <View>
             <LinearGradient
             colors={[theme.primary.normal , theme.primary.purple]}
@@ -86,10 +90,14 @@ const style = StyleSheet.create({
     chartCont:{
         flexDirection:'row',
         justifyContent:'space-evenly',
-        width: vw(100),
-        height: vh(30),
+        width: vw(93),
+        height: vh(34),
         alignItems:'flex-end',
-        marginTop:50
+        backgroundColor:theme.primary.dark,
+        paddingVertical:10,
+        borderRadius: theme.curves.xl,
+        alignSelf:'center',
+        paddingBottom:20,
     },
     barCont:{
         height:'100%',
@@ -98,7 +106,7 @@ const style = StyleSheet.create({
         gap:10,
     },
     bar:{
-        width:vw(8),
+        width:vw(11),
         borderRadius: theme.curves.full,
 
     }

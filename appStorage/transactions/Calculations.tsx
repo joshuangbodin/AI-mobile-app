@@ -33,6 +33,15 @@ export const getExpenseSummary = async ()=>{
 export const getPercentageSummary = async()=>{
     const {income , savings , expenditure} = await getExpenseSummary()
 
+    if(income==0 && savings==0 && expenditure==0){
+        return {
+            incomePercentage: 0,
+            expensePercentage: 0,
+            savingsPercentage: 0,
+            lossPercentage: 0
+        }
+    }
+
     if (expenditure<income){
         var incomeRatio = income/income 
         var expenseRatio = expenditure/income
@@ -50,7 +59,7 @@ export const getPercentageSummary = async()=>{
         var loss = expenditure - income
 
         var incomeRatio = income/income 
-        var expenseRatio = expenditure/income
+        var expenseRatio = expenditure==0? 0 : 1
         var savingsRatio = 0
         var lossRatio = loss/income
 
