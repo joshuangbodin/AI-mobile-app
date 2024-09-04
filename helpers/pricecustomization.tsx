@@ -3,7 +3,7 @@
 export const formatCurrency = (price:number , enableConcat=false)=>{
       //{currency:'₦' , number:String(price) , attachment:'NGN'} 
       if(price == 0){
-        return `₦ -----`
+        return `₦ ....`
       }
       if(price > 999999 && enableConcat){
         if(price < 1000000000){

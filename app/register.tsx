@@ -10,9 +10,12 @@ import { vh } from '@/helpers/responsivesizes'
 import { user } from '@/types/app.t'
 import { retrieveUserData, storeUserData } from '@/appStorage/user/user'
 import { router } from 'expo-router'
+import Toast from '@/components/toast/toast'
+import { showToast } from '@/components/toast/createToast'
 
 const register = () => {
     const [loading, setLoading] = useState(false)
+    const [error , setError] = useState<string>('')
     const [formInput, setFormInput] = useState<user>({
         name: '',
         password: '',
@@ -44,6 +47,7 @@ const register = () => {
         }
         else {
             //console.log(data)
+           // showToast(data.data , setError)
             setLoading(false)
         }
 
@@ -51,7 +55,6 @@ const register = () => {
 
 
     const register = async () => {
-        //console.log(formInput)
         setLoading(true)
         const data = await storeUserData(formInput)
 
@@ -62,6 +65,7 @@ const register = () => {
         else {
             setLoading(false)
             //console.log('error:', data.data)
+            showToast(data.data , setError)
            // Alert.alert('Registration Error', data.data)
         }
 
@@ -70,6 +74,7 @@ const register = () => {
 
     return (
         <ScreenWrapper SafeArea>
+            {error&&<Toast type='error' message={error}/>}
             <ScrollView  contentContainerStyle={style.container}>
                 {/* Go Back Btn */}
                 <GoBackBtn />

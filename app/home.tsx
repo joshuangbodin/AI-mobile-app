@@ -16,7 +16,7 @@ import CustomModal from "@/components/modal/CustomModal";
 import { formatCurrency } from "@/helpers/pricecustomization";
 import { randomCategoryColorGenerator } from "@/helpers/RandomGenerator";
 import { router } from "expo-router";
-import settings from "./settings";
+
 
 const home = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -25,6 +25,7 @@ const home = () => {
   const [transactionList, setTransationList] = useState<transactionList>();
   const [track, setTrack] = useState<number>(0);
   const [selectedTransaction, setSelectedTransaction] = useState<transaction>();
+
 
   // expenseSummary
   const [expenseSummary, setExpenseSummary] = useState({
@@ -93,6 +94,7 @@ const home = () => {
 
   return (
     <ScreenWrapper SafeArea={true} Style={style.container}>
+      
       {/* top */}
       <View style={style.top}>
         <View>
@@ -149,7 +151,7 @@ const home = () => {
         </TouchableOpacity>
 
         {/* button 2 */}
-        <TouchableOpacity style={style.actionbtn}>
+        <TouchableOpacity  style={style.actionbtn}>
           <FontAwesome6
             color={theme.gray.gray2}
             size={vh(1.8)}

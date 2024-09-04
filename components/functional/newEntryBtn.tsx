@@ -17,6 +17,7 @@ import { transaction } from "@/types/app.t";
 import { addToList } from "@/appStorage/transactions/transactions";
 import { LinearGradient } from "expo-linear-gradient";
 import CustomModal from "../modal/CustomModal";
+import Toast from "../toast/toast";
 
 interface props {
   isOpen: boolean;
@@ -32,6 +33,8 @@ const NewEntryBtn = ({ isOpen, setIsOpen }: props) => {
     category: "",
     dateCreated: new Date(),
   });
+
+  const [show , setShow]= useState<string>('')
 
   const createEntry = async () => {
     const { name, description, amount, type, category } = transaction;
@@ -60,6 +63,7 @@ const NewEntryBtn = ({ isOpen, setIsOpen }: props) => {
 
   return (
     <View>
+     
       {/* pop up */}
       <CustomModal
         closeBtn={() => (

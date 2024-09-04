@@ -10,9 +10,12 @@ import { vh } from '@/helpers/responsivesizes'
 import { user } from '@/types/app.t'
 import { authenticateUser, deleteUserInfo, retrieveUserData, storeUserData } from '@/appStorage/user/user'
 import { router } from 'expo-router'
+import Toast from '@/components/toast/toast'
+import { showToast } from '@/components/toast/createToast'
 
 const login = () => {
     const [loading, setLoading] = useState(false)
+    const [error , setError] = useState<string>('')
     const [formInput, setFormInput] = useState<user>({
         name: '',
         password: '',
@@ -25,23 +28,27 @@ const login = () => {
         setLoading(true)
         const { name, password } = formInput
         if (!name || !password) {
+            showToast('Please Provide All fields' , setError)
             setLoading(false)
             return
         }
 
         try {
             const data = await authenticateUser(name , password)
-
+            showToast('Authenticated', setError)
+            
             if (data.success) {
                 setLoading(false)
                 router.push('home')
                 return;
             } else {
+                showToast(data.data , setError)
                 setLoading(false)
                 //console.log(data.data)
             }
 
         } catch (err: any) {
+            showToast(err.message, setError)
             //console.log('error', err.message)
         }
 
@@ -57,6 +64,7 @@ const login = () => {
 
     return (
         <ScreenWrapper SafeArea>
+            {error&&<Toast message={error} type={error.includes('Authenticated')?'success':'error'}/>}
             <ScrollView contentContainerStyle={style.container}>
 
 

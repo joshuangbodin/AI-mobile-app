@@ -43,9 +43,26 @@ export const retrieveUserData = async ()=>{
     }
 }
 
+ const retrieveAuthUserData = async ()=>{
+    try{
+        const response = await AsyncStorage.getItem('user')
+        
+        if(response){
+            const data = await JSON.parse(response)
+            return {success:true , data}
+        }
+        else{
+            return {success:false , data:'User data not found'}
+        }
+    }
+    catch(err:any){
+        return {success:false , data: err.message}
+    }
+}
+
 export const authenticateUser =  async (name:string , password:string) =>{
     try{
-        const authUser = await retrieveUserData()
+        const authUser = await retrieveAuthUserData()
 
         if(authUser.success){
             if(authUser.data.name == name && authUser.data.password == password){

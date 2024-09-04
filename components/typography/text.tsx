@@ -14,6 +14,7 @@ interface props {
     children?: React.ReactNode;
     size?:number;
     autosize? : boolean;
+    capitalized?: boolean;
 }
 
 
@@ -25,7 +26,8 @@ const CustomText = ({
     isCentered = false,
     children,
     size,
-    autosize = false
+    autosize = false,
+    capitalized = false,
 }
     : props) => {
 
