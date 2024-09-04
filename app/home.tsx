@@ -222,8 +222,8 @@ const home = () => {
             <View style={style.modalTopView}>
               <View style={style.modalName}>
                 <CustomText size={vh(3)} isheader>{selectedTransaction.name}</CustomText>
-                <CustomText size={vh(1.3)} isSupporting>
-                  {String(selectedTransaction.dateCreated).slice(0,21)}
+                <CustomText size={vh(1.4)} isSupporting>
+                  {String(selectedTransaction.dateCreated).slice(0,10)+"  "+String(selectedTransaction.dateCreated).slice(11,16)}
                 </CustomText>
               </View>
               <CustomText isheader size={vh(2.7)}>{formatCurrency(Number(selectedTransaction.amount) , true)}</CustomText>

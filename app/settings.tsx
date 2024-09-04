@@ -1,11 +1,19 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
+import ScreenWrapper from '@/components/ScreenWrapper'
+import GoBackBtn from '@/components/ui/GoBackBtn'
 
 const settings = () => {
   return (
-    <View>
-      <Text>settings</Text>
-    </View>
+   <ScreenWrapper SafeArea>
+      {/* Top */}
+      <GoBackBtn/>
+
+      {/* List */}
+      <ScrollView>
+        
+      </ScrollView>
+   </ScreenWrapper>
   )
 }
 

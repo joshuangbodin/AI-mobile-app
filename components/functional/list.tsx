@@ -69,9 +69,10 @@ const TransactionList = ({ data , isOpen , setIsOpen , setIsSelected}: props) =>
               deleteFromList(item)
               setIsOpen()
             }}
+            
           />
       }
-
+      ListFooterComponent={<CustomText isSupporting isCentered style={{paddingVertical:30}}>End Of List</CustomText>}
       ListEmptyComponent={
         <View style={{
           flex:1,
@@ -98,6 +99,8 @@ const TransactionList = ({ data , isOpen , setIsOpen , setIsSelected}: props) =>
         margin: 0,
 
       }}
+
+      
     />
   )
 }
