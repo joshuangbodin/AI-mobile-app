@@ -211,7 +211,7 @@ const NewEntryBtn = ({ isOpen, setIsOpen }: props) => {
           <TouchableOpacity onPress={setIsOpen}>
             <LinearGradient
               colors={[
-                theme.primary.deep,
+                theme.primary.deepblue,
                 theme.primary.purple,
                 theme.primary.dark,
               ]}

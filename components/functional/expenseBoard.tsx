@@ -19,7 +19,7 @@ const ExpenseBoard = ({ savings = 0, income = 0, expenditure = 0 }: props) => {
 
     return (
         <LinearGradient
-            colors={[theme.primary.deep, theme.primary.purple, theme.primary.dark,]}
+            colors={[theme.primary.deepblue, theme.primary.purple, theme.primary.dark,]}
             style={style.container}
             start={{ x: 0, y: 1 }}
             end={{ x: 1, y: -2 }}

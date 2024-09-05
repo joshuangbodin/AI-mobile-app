@@ -16,7 +16,7 @@ interface props {
 const CustomButton = ({ title, onPress, isFullWidth = true, style, textstyle }: props) => {
     return (
         <TouchableOpacity  onPress={onPress}>
-            <LinearGradient colors={[theme.primary.deep, theme.primary.purple, theme.primary.dark,]}
+            <LinearGradient colors={[theme.primary.deepblue, theme.primary.purple, theme.primary.dark,]}
                 style={[
                     isFullWidth ? styles.btnContainer : { ...styles.btnContainer, width: 'auto' },
                     style
