@@ -1,9 +1,9 @@
 export const showToast = (message:string , setShow:React.Dispatch<React.SetStateAction<string>>)=>{
     setShow(message);
 
-    setInterval(()=>{
+    setTimeout(()=>{
         setShow('')
-    } , 5000)
+    } , 3000)
     return
 
 }

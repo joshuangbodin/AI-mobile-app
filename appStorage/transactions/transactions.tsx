@@ -20,6 +20,26 @@ export const getListFromStorage = async () => {
     }
 }
 
+export const filterListByName = async(prompt:string)=>{
+    const {success , data} = await getListFromStorage();
+
+    if(success){
+        const temp:transactionList = data
+        var newData:transactionList = {list:[]}
+        newData.list = temp.list.filter(
+            (transaction:transaction)=>{
+                if(transaction.name.toLowerCase().includes(prompt.toLowerCase())){
+                    return transaction
+                }
+            }
+        )
+
+        return {success:true , data:newData}
+    }else{
+        return{success , data}
+    }
+}
+
 
 const createList = async () => {
     try {

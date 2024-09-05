@@ -5,7 +5,7 @@ import CustomText from "@/components/typography/text";
 import { transaction, transactionList, user } from "@/types/app.t";
 import { retrieveUserData } from "@/appStorage/user/user";
 import { vh, vw } from "@/helpers/responsivesizes";
-import { Feather, FontAwesome6, MaterialIcons } from "@expo/vector-icons";
+import { Feather, FontAwesome5, FontAwesome6, MaterialIcons } from "@expo/vector-icons";
 import { theme } from "@/constants/theme";
 import ExpenseBoard from "@/components/functional/expenseBoard";
 import TransactionList from "@/components/functional/list";
@@ -25,6 +25,7 @@ const home = () => {
   const [transactionList, setTransationList] = useState<transactionList>();
   const [track, setTrack] = useState<number>(0);
   const [selectedTransaction, setSelectedTransaction] = useState<transaction>();
+  
 
 
   // expenseSummary
@@ -151,14 +152,14 @@ const home = () => {
         </TouchableOpacity>
 
         {/* button 2 */}
-        <TouchableOpacity  style={style.actionbtn}>
-          <FontAwesome6
+        <TouchableOpacity onPress={()=>router.push('/search')}  style={style.actionbtn}>
+          <FontAwesome5
             color={theme.gray.gray2}
             size={vh(1.8)}
-            name="piggy-bank"
+            name="search"
           />
 
-          <CustomText text="Budget" />
+          <CustomText text="Search" />
 
           <Feather
             color={theme.gray.white}

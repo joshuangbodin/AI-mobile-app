@@ -1,7 +1,7 @@
 import { View, Image, FlatList } from 'react-native'
 import React from 'react'
 import CustomText from '../typography/text'
-import { vw } from '@/helpers/responsivesizes'
+import { vh, vw } from '@/helpers/responsivesizes'
 import { transactionList } from '@/types/app.t'
 import ListItem from './listItem'
 import { deleteFromList } from '@/appStorage/transactions/transactions'
@@ -12,9 +12,10 @@ interface props {
   isOpen: number;
   setIsOpen: ()=> void;
   setIsSelected: (index:number)=>void;
+  showEnd?:boolean;
 }
 
-const TransactionList = ({ data , isOpen , setIsOpen , setIsSelected}: props) => {
+const TransactionList = ({ data , isOpen ,showEnd=true, setIsOpen , setIsSelected}: props) => {
   if (!data) {
     return (
       <FlatList
@@ -72,7 +73,7 @@ const TransactionList = ({ data , isOpen , setIsOpen , setIsSelected}: props) =>
             
           />
       }
-      ListFooterComponent={<CustomText isSupporting isCentered style={{paddingVertical:30}}>End Of List</CustomText>}
+      ListFooterComponent={showEnd?<CustomText size={vh(1.4)} isSupporting isCentered style={{paddingVertical:30}}>End Of List</CustomText>:<></>}
       ListEmptyComponent={
         <View style={{
           flex:1,

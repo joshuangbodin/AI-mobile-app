@@ -18,6 +18,7 @@ import { addToList } from "@/appStorage/transactions/transactions";
 import { LinearGradient } from "expo-linear-gradient";
 import CustomModal from "../modal/CustomModal";
 import Toast from "../toast/toast";
+import { showToast } from "../toast/createToast";
 
 interface props {
   isOpen: boolean;
@@ -40,12 +41,12 @@ const NewEntryBtn = ({ isOpen, setIsOpen }: props) => {
     const { name, description, amount, type, category } = transaction;
 
     if (!name || !description || !amount || !type || !category) {
-      console.log("provide all the useful infomation");
+      showToast("Please Provide all Information", setShow);
       return;
     }
 
     if (Number.isNaN(Number(amount))) {
-      console.log("amount is not a number");
+      showToast("amount is not a number", setShow);
       return;
     }
 
@@ -79,6 +80,7 @@ const NewEntryBtn = ({ isOpen, setIsOpen }: props) => {
         height={vh(95)}
         setVisible={setIsOpen}
       >
+        {show&&<Toast message={show} type="error"/> }
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.form}
