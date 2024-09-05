@@ -8,6 +8,7 @@ import { vh, vw } from "@/helpers/responsivesizes";
 import { theme } from "@/constants/theme";
 import {
   deleteFromList,
+  filterListByCategory,
   filterListByName,
   getListFromStorage,
 } from "@/appStorage/transactions/transactions";
@@ -16,6 +17,7 @@ import TransactionList from "@/components/functional/list";
 import CustomModal from "@/components/modal/CustomModal";
 import { formatCurrency } from "@/helpers/pricecustomization";
 import { randomCategoryColorGenerator } from "@/helpers/RandomGenerator";
+import CategoryList from "@/components/functional/categoryList";
 
 const search = () => {
  
@@ -24,14 +26,15 @@ const search = () => {
   const [track, setTrack] = useState<number>(0);
   const [selectedTransaction, setSelectedTransaction] = useState<transaction>();
   const [searchPrompt , setSearchPrompt] = useState<string>('')
+  const [active , setActive] = useState<string>('All')
 
  
 
   //initial render
   useEffect(() => {
     initializeBySearchPrompt();
-    //initializeList();
-  }, [searchPrompt, track, isVisible]);
+    initializeListByCategory();
+  }, [searchPrompt, track, active,isVisible]);
 
   const initializeList = async () => {
     const data = await getListFromStorage();
@@ -41,9 +44,20 @@ const search = () => {
     }
   };
 
+  const setActiveCategory = (cate:string)=>{
+    setActive(cate)
+  }
+
  
   const initializeBySearchPrompt = async() =>{
     const {success , data} = await filterListByName(searchPrompt)
+    if(success){
+        setTransationList(data)
+    }
+  }
+
+  const initializeListByCategory = async()=>{
+    const {success , data} = await filterListByCategory(active)
     if(success){
         setTransationList(data)
     }
@@ -89,6 +103,9 @@ const search = () => {
           </Pressable>}
         </View>
       </View>
+
+      {/* Category List */}
+      <CategoryList active={active} setActive={setActiveCategory}/>
 
       {/* List */}
       {/* list area */}
@@ -201,7 +218,7 @@ const styles = StyleSheet.create({
   listarea: {
     width: vw(95),
     paddingHorizontal: 10,
-    marginTop: 30,
+    marginTop: 10,
     flex: 1,
     minHeight: vh(58),
     alignSelf: "center",
