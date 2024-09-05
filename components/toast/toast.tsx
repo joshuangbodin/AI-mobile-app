@@ -3,7 +3,7 @@ import React from 'react'
 import CustomText from '../typography/text'
 import { vh, vw } from '@/helpers/responsivesizes'
 import { theme } from '@/constants/theme'
-import Animated, { FadeInUp, FadeOutUp } from 'react-native-reanimated'
+import Animated, { FadeInDown, FadeInUp, FadeOutDown, FadeOutUp } from 'react-native-reanimated'
 
 interface props{
     message: string,
@@ -16,7 +16,7 @@ const Toast = ({message, type,color}:props) => {
 
     
   return (
-   <Animated.View entering={FadeInUp} exiting={FadeOutUp}  style={style.container}>
+   <Animated.View entering={FadeInDown} exiting={FadeOutDown}  style={style.container}>
     <View style={[style.content , type=='success'?{}:type=='error'?{backgroundColor:'red'}:{backgroundColor:color}]}>
         <CustomText isheader size={vh(2)}>{message}</CustomText>
     </View>
@@ -32,7 +32,7 @@ const style = StyleSheet.create({
         width:vw(100),
         height: vh(8),
         left:0,
-        top:0,
+        bottom:0,
         zIndex:90
     },
     content:{

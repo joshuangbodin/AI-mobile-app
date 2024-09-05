@@ -40,7 +40,7 @@ const TransactionList = ({ data , isOpen ,showEnd=true, setIsOpen , setIsSelecte
               height: vw(30)
             }} 
             source={require('../../assets/images/empty.png')}/>
-            <CustomText isSupporting>No Transaction Yet</CustomText>
+            <CustomText isSupporting>Empty! Empty! Empty!</CustomText>
           </View>}
 
 
@@ -59,6 +59,7 @@ const TransactionList = ({ data , isOpen ,showEnd=true, setIsOpen , setIsSelecte
         ({ item , index }) =>
           <ListItem
             name={item.name}
+            index={index}
             description={item.description}
             dateCreated={item.dateCreated}
             type={item.type}
@@ -88,7 +89,7 @@ const TransactionList = ({ data , isOpen ,showEnd=true, setIsOpen , setIsSelecte
             height: vw(30)
           }} 
           source={require('../../assets/images/empty.png')}/>
-          <CustomText isSupporting>No Transaction Yet</CustomText>
+           <CustomText isSupporting>Empty! Empty! Empty!</CustomText>
         </View>
         }
 

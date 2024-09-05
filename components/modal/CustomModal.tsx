@@ -2,6 +2,7 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import React, { ReactNode } from "react";
 import { vh, vw } from "@/helpers/responsivesizes";
 import { theme } from "@/constants/theme";
+import Animated, { FadeInDown, FadeOutDown, SlideInDown, SlideOutDown } from "react-native-reanimated";
 
 interface props {
   visible: boolean;
@@ -10,6 +11,7 @@ interface props {
   styles?: any;
   height?: number;
   closeBtn?: () => ReactNode;
+  background?: string;
 }
 
 const CustomModal = ({
@@ -19,23 +21,27 @@ const CustomModal = ({
   height,
   styles,
   closeBtn,
+  background
 }: props) => {
   return (
-    <View
+    <Animated.View
+    entering={SlideInDown}
+    exiting={SlideOutDown}
       style={[
         style.container,
         visible ? {} : style.hidden,
         styles && styles,
         height && { height },
         closeBtn && { left: -4 },
+        {backgroundColor:background}
       ]}
     >
-      <TouchableOpacity style={{ height: vh(3) }} onPress={setVisible}>
+      <TouchableOpacity style={{ minHeight: vh(3) }} onPress={setVisible}>
         {closeBtn ? closeBtn() : <View style={style.btn}></View>}
       </TouchableOpacity>
 
       {children}
-    </View>
+    </Animated.View>
   );
 };
 

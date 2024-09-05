@@ -15,7 +15,13 @@ export const formatCurrency = (price:number , enableConcat=false)=>{
             return `₦${degraded}B`
         }
       }
-      const data = Intl.NumberFormat('en-EN' , {style:'currency' ,currency:'NGN' , currencyDisplay:'narrowSymbol'}).format(price)
+      if(price<0){
+        const data = Intl.NumberFormat().format(-1*price)
+        return `-₦${data}`
+      }
+      const data = Intl.NumberFormat().format(price)
 
-    return data    
+      
+
+    return `₦${data}`
 }

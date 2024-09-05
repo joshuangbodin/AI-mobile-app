@@ -5,6 +5,7 @@ import { theme } from '@/constants/theme'
 import CustomText from '../typography/text'
 import { formatCurrency } from '@/helpers/pricecustomization'
 import { LinearGradient } from 'expo-linear-gradient'
+import Animated, { FadeIn } from 'react-native-reanimated'
 
 interface props {
     savings?: number;
@@ -23,7 +24,7 @@ const ExpenseBoard = ({ savings = 0, income = 0, expenditure = 0 }: props) => {
             start={{ x: 0, y: 1 }}
             end={{ x: 1, y: -2 }}
         >
-            <View style={style.infobox}>
+            <Animated.View entering={FadeIn.duration(500)} style={style.infobox}>
 
                 {/* Savings */}
                 <View>
@@ -73,7 +74,7 @@ const ExpenseBoard = ({ savings = 0, income = 0, expenditure = 0 }: props) => {
                     </View>
                 </View>
 
-            </View>
+            </Animated.View>
         </LinearGradient>
     )
 }

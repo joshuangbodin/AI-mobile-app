@@ -57,6 +57,9 @@ const search = () => {
   }
 
   const initializeListByCategory = async()=>{
+    if(searchPrompt){
+        return
+    }
     const {success , data} = await filterListByCategory(active)
     if(success){
         setTransationList(data)
@@ -125,6 +128,7 @@ const search = () => {
           setIsVisible(!isVisible);
         }}
         visible={isVisible}
+        background={theme.primary.deep}
       >
         {/* view transaction */}
         {selectedTransaction ? (
@@ -199,6 +203,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     gap: 20,
+    alignItems:'center'
   },
   searchBar: {
     flexDirection: "row",
@@ -241,7 +246,7 @@ const styles = StyleSheet.create({
   },
 
   cateBtn:{
-    backgroundColor: theme.primary.darker,
+    backgroundColor: theme.primary.dark,
     padding:3,
     justifyContent:'center',
     alignItems:'center',
@@ -250,7 +255,7 @@ const styles = StyleSheet.create({
   },
 
   desc:{
-    backgroundColor:theme.primary.darker,
+    backgroundColor:theme.primary.dark,
     padding:10,
     height:vh(20),
     borderRadius: theme.curves.lg
@@ -266,7 +271,7 @@ const styles = StyleSheet.create({
   btn:{
     width: vw(20),
     height:vh(5),
-    backgroundColor: theme.primary.darker,
+    backgroundColor: theme.primary.dark,
     justifyContent:'center',
     alignItems:'center',
     borderRadius: theme.curves.md

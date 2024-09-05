@@ -45,14 +45,14 @@ const Grid = () => {
       <CustomText isSupporting>Transaction Data</CustomText>
       <View style={styles.grid}>
         <View style={styles.columns}>
-          <StatCard info='No of Income' data={info.noOfIncome} units='Transactions' height={vh(25)}/>
-          <StatCard info='Highest Expense' textSize={vh(2.4)} data={info.highestExpenditure.name} units='Name' height={vh(25)}/>
-          <StatCard info='Highest Income' textSize={vh(2.5)} data={formatCurrency(Number(info.highestIncome.amount),true)} units='Naira' height={vh(20)}/>
+          <StatCard info='No of Income' dur={300} data={info.noOfIncome} units='Transactions' height={vh(25)}/>
+          <StatCard dur={300} info='Highest Expense' textSize={vh(2.4)} data={info.highestExpenditure.name} units='Name' height={vh(25)}/>
+          <StatCard dur={350} info='Highest Income' textSize={vh(2.5)} data={formatCurrency(Number(info.highestIncome.amount),true)} units='Naira' height={vh(20)}/>
         </View>
         <View style={styles.columns}>
-          <StatCard info='No of Expense' data={info.noOfExpenses} units='Transactions' height={vh(20)}/>
-          <StatCard info='Highest Expense' textSize={vh(2.5)} data={formatCurrency(Number(info.highestExpenditure.amount),true)} units='Naira' height={vh(20)}/>
-          <StatCard info='Highest Income' textSize={vh(2.4)} data={info.highestIncome.name} units='Name' height={vh(30)}/>
+          <StatCard dur={400} info='No of Expense' data={info.noOfExpenses} units='Transactions' height={vh(20)}/>
+          <StatCard dur={450} info='Highest Expense' textSize={vh(2.5)} data={formatCurrency(Number(info.highestExpenditure.amount),true)} units='Naira' height={vh(20)}/>
+          <StatCard dur={500} info='Highest Income' textSize={vh(2.4)} data={info.highestIncome.name} units='Name' height={vh(30)}/>
         </View>
       </View>
     </View>

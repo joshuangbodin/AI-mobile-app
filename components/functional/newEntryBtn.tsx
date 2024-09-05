@@ -74,7 +74,9 @@ const NewEntryBtn = ({ isOpen, setIsOpen }: props) => {
             color={theme.gray.gray3}
             size={vh(3)}
           />
+          
         )}
+        background={theme.primary.dark}
         visible={isOpen}
         styles={{ left: 0, width: vw(100) }}
         height={vh(95)}
@@ -90,37 +92,44 @@ const NewEntryBtn = ({ isOpen, setIsOpen }: props) => {
 
           <View style={{ gap: 10 }}>
             {/* name */}
-            <TextInput
-              value={transaction.name}
-              onChangeText={(value) =>
-                setTransaction({ ...transaction, name: value })
-              }
-              style={styles.formName}
-              placeholder=" Name"
-              placeholderTextColor={theme.gray.gray2}
-            />
+            <View style={styles.View} >
+              <TextInput
+                value={transaction.name}
+                onChangeText={(value) =>
+                  setTransaction({ ...transaction, name: value })
+                }
+                style={styles.formName}
+                placeholder=" Name"
+                placeholderTextColor={theme.gray.gray2}
+              
+              />
+            </View>
             {/* Amount */}
-            <TextInput
-              value={transaction.amount}
-              onChangeText={(value) =>
-                setTransaction({ ...transaction, amount: value })
-              }
-              keyboardType="numeric"
-              style={styles.formName}
-              placeholder="$Amount"
-              placeholderTextColor={theme.gray.gray2}
-            />
+            <View style={styles.View}>
+              <TextInput
+                value={transaction.amount}
+                onChangeText={(value) =>
+                  setTransaction({ ...transaction, amount: value })
+                }
+                keyboardType="numeric"
+                style={styles.formName}
+                placeholder="$Amount"
+                placeholderTextColor={theme.gray.gray2}
+              />
+            </View>
             {/* description */}
-            <TextInput
-              value={transaction.description}
-              onChangeText={(value) =>
-                setTransaction({ ...transaction, description: value })
-              }
-              style={styles.formDescription}
-              multiline
-              placeholder="Description ..."
-              placeholderTextColor={theme.gray.gray2}
-            />
+            <View style={styles.View}>
+              <TextInput
+                value={transaction.description}
+                onChangeText={(value) =>
+                  setTransaction({ ...transaction, description: value })
+                }
+                style={styles.formDescription}
+                multiline
+                placeholder="Description ..."
+                placeholderTextColor={theme.gray.gray2}
+              />
+            </View>
           </View>
 
           {/* type toggle */}
@@ -163,6 +172,7 @@ const NewEntryBtn = ({ isOpen, setIsOpen }: props) => {
                   : categories.income
               }
               renderItem={({ item }) => (
+                
                 <TouchableOpacity
                   onPress={() => {
                     setTransaction({ ...transaction, category: item });
@@ -249,19 +259,21 @@ const styles = StyleSheet.create({
     width: "100%",
     fontSize: vh(2.2),
     height: vh(4.5),
-    borderRadius: theme.curves.md,
-    paddingHorizontal: 10,
-    backgroundColor: theme.primary.alt,
+   
+    
     color: theme.gray.gray4,
   },
 
   formDescription: {
     fontSize: vh(2.2),
     height: vh(8),
-    borderRadius: theme.curves.md,
-    paddingHorizontal: 10,
     color: theme.gray.gray4,
     backgroundColor: theme.primary.alt,
+  },
+  View:{
+    paddingHorizontal:10,
+    backgroundColor: theme.primary.alt,
+    borderRadius: theme.curves.md,
   },
 
   type: {

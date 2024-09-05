@@ -1,4 +1,4 @@
-import { View, StyleSheet, TouchableOpacity, ScrollView, Image } from "react-native";
+import { View, StyleSheet, TouchableOpacity, ScrollView, Image, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import CustomText from "@/components/typography/text";
@@ -16,6 +16,7 @@ import CustomModal from "@/components/modal/CustomModal";
 import { formatCurrency } from "@/helpers/pricecustomization";
 import { randomCategoryColorGenerator } from "@/helpers/RandomGenerator";
 import { router } from "expo-router";
+import Animated, { FadeInRight } from "react-native-reanimated";
 
 
 const home = () => {
@@ -69,6 +70,7 @@ const home = () => {
 
   const toggle = () => {
     setIsOpen(!isOpen);
+    initializeList();
   };
 
   const increment = () => {
@@ -92,6 +94,27 @@ const home = () => {
       setSelectedTransaction(transactionList.list[index]);
     }
   };
+
+  const Action = [
+    {
+    route: '/analytics',
+    name: 'Analytics',
+    icon: ()=>  <FontAwesome6
+        color={theme.gray.gray2}
+        size={vh(1.8)}
+        name="money-bill-trend-up"
+      />
+    },
+     {
+    route: '/search',
+    name: 'Search',
+    icon: ()=>  <FontAwesome5
+        color={theme.gray.gray2}
+        size={vh(1.8)}
+        name="search"
+      />
+    }
+      ]
 
   return (
     <ScreenWrapper SafeArea={true} Style={style.container}>
@@ -128,71 +151,38 @@ const home = () => {
         />
       </View>
 
-      {/* call to actions */}
-      <ScrollView
-        showsHorizontalScrollIndicator={false}
-        horizontal
-        contentContainerStyle={style.action}
-      >
-        {/* button 1 */}
-        <TouchableOpacity onPress={()=>router.push('/analytics')} style={style.actionbtn}>
-          <FontAwesome6
-            color={theme.gray.gray2}
-            size={vh(1.8)}
-            name="money-bill-trend-up"
-          />
-
-          <CustomText text="Analytics" />
-
-          <Feather
-            color={theme.gray.white}
-            size={vh(1.8)}
-            name="chevron-right"
-          />
-        </TouchableOpacity>
-
-        {/* button 2 */}
-        <TouchableOpacity onPress={()=>router.push('/search')}  style={style.actionbtn}>
-          <FontAwesome5
-            color={theme.gray.gray2}
-            size={vh(1.8)}
-            name="search"
-          />
-
-          <CustomText text="Search" />
-
-          <Feather
-            color={theme.gray.white}
-            size={vh(1.8)}
-            name="chevron-right"
-          />
-        </TouchableOpacity>
-
-        {/* button 3 */}
-        <TouchableOpacity style={style.actionbtn}>
-          <MaterialIcons
-            color={theme.gray.gray2}
-            size={vh(1.8)}
-            name="celebration"
-          />
-
-          <CustomText text="Plan Event" />
-
-          <Feather
-            color={theme.gray.white}
-            size={vh(1.8)}
-            name="chevron-right"
-          />
-        </TouchableOpacity>
-      </ScrollView>
+          
 
       {/* list area */}
+      <View style={{justifyContent:'center' , height:vh(10)}}>
+        <FlatList
+        data={Action}
+        horizontal
+        
+        contentContainerStyle={{ justifyContent:'center' , alignItems:'center' , gap:10,
+          paddingLeft:10
+        }}
+        renderItem={({item , index})=>(
+          <Animated.View entering={FadeInRight.duration(200 * (index+1))}>
+              <TouchableOpacity onPress={()=>router.push(item.route)} style={style.actionbtn}>
+            {item.icon()}
+            <CustomText text={item.name} />
+            <Feather
+              color={theme.gray.white}
+              size={vh(1.8)}
+              name="chevron-right"
+            />
+          </TouchableOpacity>
+          </Animated.View>
+        )}
+        />
+      </View>
 
       <View style={style.listarea}>
         <CustomText
           isSupporting
           size={vh(1.7)}
-          style={{ paddingTop: 20, paddingBottom: 10 }}
+          style={{ paddingTop: 5, paddingBottom: 10 }}
           text="All Transactions"
         />
         <TransactionList
@@ -214,6 +204,7 @@ const home = () => {
           setIsVisible(!isVisible);
         }}
         visible={isVisible}
+        background={theme.primary.deep}
       >
         {/* view transaction */}
         {selectedTransaction ? (
@@ -320,6 +311,7 @@ const style = StyleSheet.create({
   actionbtn: {
     minWidth: vw(40),
     maxWidth: 250,
+    height:vh(6),
     justifyContent: "space-around",
     backgroundColor: theme.primary.dark,
     borderRadius: theme.curves.lg,
@@ -356,7 +348,7 @@ const style = StyleSheet.create({
   },
 
   cateBtn:{
-    backgroundColor: theme.primary.darker,
+    backgroundColor: theme.primary.dark,
     padding:3,
     justifyContent:'center',
     alignItems:'center',
@@ -365,7 +357,7 @@ const style = StyleSheet.create({
   },
 
   desc:{
-    backgroundColor:theme.primary.darker,
+    backgroundColor:theme.primary.dark,
     padding:10,
     height:vh(20),
     borderRadius: theme.curves.lg
@@ -381,7 +373,7 @@ const style = StyleSheet.create({
   btn:{
     width: vw(20),
     height:vh(5),
-    backgroundColor: theme.primary.darker,
+    backgroundColor: theme.primary.dark,
     justifyContent:'center',
     alignItems:'center',
     borderRadius: theme.curves.md

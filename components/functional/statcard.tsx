@@ -3,6 +3,7 @@ import React from "react";
 import { vh } from "@/helpers/responsivesizes";
 import { theme } from "@/constants/theme";
 import CustomText from "../typography/text";
+import Animated, { FadeInDown } from "react-native-reanimated";
 
 interface props {
   info: string;
@@ -10,15 +11,16 @@ interface props {
   units: string;
   height?: number;
   textSize?:number;
+  dur:number;
 }
 
-const statcard = ({ info, data, units, height ,textSize }: props) => {
+const statcard = ({ info, data,dur, units, height ,textSize }: props) => {
   return (
-    <View style={[styles.container, height ? { height } : { height: vh(20) },]}>
+    <Animated.View entering={FadeInDown.duration(dur)} style={[styles.container, height ? { height } : { height: vh(20) },]}>
       <CustomText isSupporting>{info}</CustomText>
       <CustomText size={textSize&&textSize} isheader>{data?data:'...'}</CustomText>
       <CustomText isSupporting>{units}</CustomText>
-    </View>
+    </Animated.View>
   );
 };
 

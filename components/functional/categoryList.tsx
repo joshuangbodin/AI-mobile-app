@@ -2,10 +2,11 @@ import { View, Text, FlatList, StyleSheet } from 'react-native'
 import React from 'react'
 import CustomText from '../typography/text'
 import { vh, vw } from '@/helpers/responsivesizes'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native'
 import { theme } from '@/constants/theme'
 import { categories } from '@/constants/functional'
 import { randomCategoryColorGenerator } from '@/helpers/RandomGenerator'
+import Animated, { FadeInRight } from 'react-native-reanimated'
 
 interface props{
     active: string;
@@ -19,8 +20,8 @@ const CategoryList = ({active , setActive}:props) => {
     contentContainerStyle={{justifyContent:'center',gap:5,alignItems:'center'}}
     data={['All',...categories.expense , ...categories.income]}
     horizontal
-    renderItem={({item})=>(
-        <CateGoryCard onPress={()=>setActive(item)} color={active == item ? randomCategoryColorGenerator(item): undefined} name={String(item)}/>
+    renderItem={({item,index})=>(
+        <CateGoryCard index={index+1} onPress={()=>setActive(item)} color={active == item ? randomCategoryColorGenerator(item): theme.primary.dark} name={String(item)}/>
     )}
     >
 
@@ -35,16 +36,17 @@ export default CategoryList
 interface catProps{
     name:string;
     color?:string;
-    onPress: ()=> void
+    onPress: ()=> void;
+    index:number;
 }
 
-const CateGoryCard = ({name,color , onPress}:catProps)=>{
+const CateGoryCard = ({name,color ,index, onPress}:catProps)=>{
     return(
-        <View>
+        <Animated.View entering={FadeInRight.duration(index*200)}>
             <TouchableOpacity onPress={onPress} style={[styles.CateCard , {backgroundColor:color}]}>
                 <CustomText>{name}</CustomText>
             </TouchableOpacity>
-        </View>
+        </Animated.View>
     )
 }
 

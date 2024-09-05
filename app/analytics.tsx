@@ -6,6 +6,7 @@ import CustomText from "@/components/typography/text";
 import { vh } from "@/helpers/responsivesizes";
 import Graph from "@/components/functional/graph";
 import Grid from "@/components/functional/Grid";
+import Animated, { FadeIn } from "react-native-reanimated";
 
 const analytics = () => {
   return (
@@ -19,15 +20,14 @@ const analytics = () => {
       {/* DashBoard */}
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{gap:10}}>
         {/* Graph */}
-        <View>
+        <Animated.View entering={FadeIn}>
           
           <Graph />
-        </View>
+        </Animated.View>
 
         {/* Grid */}
         <View>
-            <Grid>
-            </Grid>
+            <Grid/>
         </View>
       </ScrollView>
     </ScreenWrapper>

@@ -7,26 +7,20 @@ interface props{
     children: React.ReactNode;
     SafeArea?: boolean;
     Style?: any;
-    scrollable?:boolean;
+   
 }
 
-const ScreenWrapper = ({children , SafeArea=true ,scrollable=false, Style}:props) => {
+const ScreenWrapper = ({children , SafeArea=true , Style}:props) => {
     const {top} = useSafeAreaInsets();
 
-    const paddingTop = top>0? 5 : top+10
+    const paddingTop = top>0? top+5 : top+10
 
 
-if(scrollable){
-  return (
-    <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.container , SafeArea &&{paddingTop} , Style]}>
-       {children}
-    </ScrollView>
-  )
-}
+
 
 
   return (
-    <View style={[styles.container , SafeArea &&{paddingTop} , Style]}>
+    <View style={[styles.container , SafeArea&&{paddingTop} , Style]}>
       {children}
     </View>
   )
