@@ -6,7 +6,7 @@ import {
   Pressable,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import GoBackBtn from "@/components/ui/GoBackBtn";
 import CustomText from "@/components/typography/text";
@@ -14,9 +14,29 @@ import { vh, vw } from "@/helpers/responsivesizes";
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { theme } from "@/constants/theme";
 import ArticleList from "@/components/functional/ArticleList";
+import { financialArticles } from "@/constants/articles";
 
 const articles = () => {
   const [searchPrompt, setSearchPrompt] = useState("");
+  const [list, setList] = useState<any[]>([]);
+
+  useEffect(() => {
+    initialise();
+    filterByPrompt();
+  }, [searchPrompt]);
+
+  const initialise = () => {
+    setList(financialArticles);
+  };
+  const filterByPrompt = () => {
+    const newList = financialArticles.filter((article) => {
+      if (article.name.toLowerCase().includes(searchPrompt.toLowerCase())) {
+        return article;
+      }
+    });
+
+    setList(newList);
+  };
   return (
     <ScreenWrapper Style={{ paddingHorizontal: 10 }} SafeArea>
       <View style={style.top}>
@@ -48,7 +68,7 @@ const articles = () => {
 
       {/* Article List */}
       <View>
-        <ArticleList />
+        <ArticleList data={list} />
       </View>
     </ScreenWrapper>
   );

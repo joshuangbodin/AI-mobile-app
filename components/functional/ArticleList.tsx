@@ -1,18 +1,23 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { FlatList } from 'react-native-gesture-handler'
-import { financialArticles } from '@/constants/articles'
 import CustomText from '../typography/text'
 import { vh } from '@/helpers/responsivesizes'
 import Ratings from './Ratings'
 import { router } from 'expo-router'
+import { theme } from '@/constants/theme'
+import Animated, { FadeInDown } from 'react-native-reanimated'
 
-const ArticleList = () => {
+interface props{
+    data: any[]
+}
+
+const ArticleList = ({data}:props) => {
   return (
     <FlatList
-    data={financialArticles}
+    data={data}
     renderItem={({item , index}) =>(
-        <ArticleItem onPress={()=> router.push({pathname:'/reading' , params:item})} brief={item.article} name={item.name}/>
+        <ArticleItem Key={index+1} key={index} rating={item.rating} onPress={()=> router.push({pathname:'/reading' , params:{name:item.name}})} brief={item.article} name={item.name}/>
     )}
     contentContainerStyle={{
         gap:10,
@@ -30,21 +35,22 @@ export default ArticleList
 interface articleProps{
     name: string;
     brief: string;
-    rating? : number;
-    onPress: ()=> void
+    rating : number;
+    onPress: ()=> void;
+    Key:number;
 }
 
-const ArticleItem = ({name ,rating ,onPress, brief}:articleProps) =>{
+const ArticleItem = ({name ,Key,rating ,onPress, brief}:articleProps) =>{
     return(
-        <View style={styles.itemcont}>
+        <Animated.View entering={FadeInDown.duration(200*Key)} style={styles.itemcont}>
             <TouchableOpacity onPress={onPress} style={styles.itempress}>
                 <CustomText isheader size={vh(2.3)}>{name}</CustomText>
                 <CustomText isSupporting style={{fontWeight:400}} size={vh(1.8)}>{brief.slice(0,70)+'...'}</CustomText>
                 <View style={styles.rating}>
-                    <Ratings/>
+                    <Ratings rating={rating}/>
                 </View>
             </TouchableOpacity>
-        </View>
+        </Animated.View>
     )
 }
 
@@ -53,13 +59,16 @@ const ArticleItem = ({name ,rating ,onPress, brief}:articleProps) =>{
 const styles = StyleSheet.create({
     //item
     itemcont:{
-        height:vh(12),
+        height:vh(15),
         justifyContent:'center',
+        borderTopWidth:2,
+        borderTopColor:theme.primary.dark
 
     }
     ,
     itempress:{
         flex:1,
+        padding:10,
         justifyContent:'space-around',
     },
     rating:{
