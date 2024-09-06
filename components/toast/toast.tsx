@@ -4,6 +4,7 @@ import CustomText from '../typography/text'
 import { vh, vw } from '@/helpers/responsivesizes'
 import { theme } from '@/constants/theme'
 import Animated, { FadeInDown, FadeInUp, FadeOutDown, FadeOutUp } from 'react-native-reanimated'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 interface props{
     message: string,
@@ -13,11 +14,13 @@ interface props{
 
 
 const Toast = ({message, type,color}:props) => {
+    const {top} = useSafeAreaInsets()
 
+    const marginTop = top>0? top+5 : top+10
     
   return (
-   <Animated.View entering={FadeInDown} exiting={FadeOutDown}  style={style.container}>
-    <View style={[style.content , type=='success'?{}:type=='error'?{backgroundColor:'red'}:{backgroundColor:color}]}>
+   <Animated.View entering={FadeInUp} exiting={FadeOutUp}  style={style.container}>
+    <View style={[style.content ,{marginTop}, type=='success'?{}:type=='error'?{backgroundColor:'red'}:{backgroundColor:color}]}>
         <CustomText isheader size={vh(2)}>{message}</CustomText>
     </View>
    </Animated.View>
@@ -30,9 +33,9 @@ const style = StyleSheet.create({
         alignItems:'center',
         position:'absolute',
         width:vw(100),
-        height: vh(8),
+        minHeight: vh(8),
         left:0,
-        bottom:0,
+        top:0,
         zIndex:90
     },
     content:{

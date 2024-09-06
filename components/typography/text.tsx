@@ -1,9 +1,10 @@
 import { StyleSheet, Text } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { vh } from '@/helpers/responsivesizes';
 import { theme } from '@/constants/theme';
 import { AutoSizeText, ResizeTextMode } from 'react-native-auto-size-text'
-
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 
 interface props {
     text?: string;
@@ -14,7 +15,7 @@ interface props {
     children?: React.ReactNode;
     size?:number;
     autosize? : boolean;
-    capitalized?: boolean;
+    
 }
 
 
@@ -27,9 +28,23 @@ const CustomText = ({
     children,
     size,
     autosize = false,
-    capitalized = false,
+    
 }
     : props) => {
+
+        const [loaded, error] = useFonts({
+            'Inter': require('../../assets/font/Inter.ttf'),
+          });
+
+          useEffect(() => {
+            if (loaded || error) {
+              SplashScreen.hideAsync();
+            }
+          }, [loaded, error]);
+        
+          if (!loaded && !error) {
+            return null;
+          }
 
 
     if (children) {
@@ -40,7 +55,8 @@ const CustomText = ({
                     isheader ? styles.headertext : isSupporting && styles.supporting,
                     isCentered && { textAlign: 'center' },
                     style,
-                    size&&{fontSize:size}
+                    size&&{fontSize:size},
+                    {fontFamily:'Inter'}
                 ]}
             >
                 {children}
@@ -50,21 +66,18 @@ const CustomText = ({
 
     if(autosize){
         return(
-            <AutoSizeText
-            minFontSize={10}
-            numberOfLines={1}
-            fontSize={size? size : vh(1.3)}
-            mode={ResizeTextMode.min_font_size}
+            <Text
             style={[
                 styles.text,
                 isheader ? styles.headertext : isSupporting && styles.supporting,
                 isCentered && { textAlign: 'center' },
                 style,
-                size&&{fontSize:size}
+                size&&{fontSize:size},
+                {fontFamily:'Inter'}
             ]}
             >
                 {text}
-            </AutoSizeText>
+            </Text>
         )
     }
 
@@ -76,7 +89,8 @@ const CustomText = ({
                 isheader ? styles.headertext : isSupporting && styles.supporting,
                 isCentered && { textAlign: 'center' },
                 style,
-                size&&{fontSize:size}
+                size&&{fontSize:size},
+                {fontFamily:'Inter'}
             ]}
         >
             {text}

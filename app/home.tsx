@@ -122,9 +122,9 @@ const home = () => {
       {/* top */}
       <View style={style.top}>
         <View>
-          <CustomText size={vh(1.6)} isSupporting text="Hello!" />
+          <CustomText size={vh(1.6)} isSupporting>Hello!</CustomText>
           {userInfo ? (
-            <CustomText isheader style={style.name} text={userInfo.name} />
+            <CustomText isheader style={style.name}>{userInfo.name}</CustomText>
           ) : (
             <CustomText isheader style={style.name} text={"user"} />
           )}
@@ -153,7 +153,7 @@ const home = () => {
 
           
 
-      {/* list area */}
+     
       <View style={{justifyContent:'center' , height:vh(10)}}>
         <FlatList
         data={Action}
@@ -166,7 +166,7 @@ const home = () => {
           <Animated.View entering={FadeInRight.duration(200 * (index+1))}>
               <TouchableOpacity onPress={()=>router.push(item.route)} style={style.actionbtn}>
             {item.icon()}
-            <CustomText text={item.name} />
+            <CustomText>{item.name} </CustomText>
             <Feather
               color={theme.gray.white}
               size={vh(1.8)}
@@ -183,8 +183,8 @@ const home = () => {
           isSupporting
           size={vh(1.7)}
           style={{ paddingTop: 5, paddingBottom: 10 }}
-          text="All Transactions"
-        />
+
+        >All Transactions</CustomText>
         <TransactionList
           isOpen={track}
           setIsSelected={isSelected}
