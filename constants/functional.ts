@@ -1,6 +1,6 @@
 const incomeCategories = [
-    'Salary / Wages',
-    'Sales / TurnOver',
+    'Wages',
+    'Sales',
     'Loan',
     'Gift',
     'Luck',
@@ -9,8 +9,8 @@ const incomeCategories = [
 
 const expenseCategories =[
     'Feeding',
-    'Properties / Assets',
-    'Health / Fitness',
+    'Properties',
+    'Health',
     'Investments',
     'Bills ',
     'Charges',

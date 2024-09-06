@@ -34,14 +34,14 @@ const ListItem = ({ name, description, amount, type, category, dateCreated,index
                         </CustomText>
                     </View>
                     <View  style={[style.cate  , {backgroundColor:randomCategoryColorGenerator(category)}]}>
-                        <CustomText isSupporting style={{color:theme.gray.white}} size={vh(1.2)} text={category} />
+                        <CustomText isSupporting style={{color:theme.gray.white}} size={vh(1.5)} text={category} />
                     </View>
                 </View>
                 {/* other info */}
                 <View style={{width:'50%' , justifyContent:'space-around',height:'100%'}}>
                     <CustomText style={{fontWeight:'700'}} text={name} />
-                    <CustomText size={vh(1.7)} text={description.length>20? description.slice(0,20)+'...' : description} />
-                    <CustomText isSupporting text={String(dateCreated).slice(0,10)} />
+                    <CustomText size={vh(1.7)} style={{color:theme.gray.gray3}} text={description.length>20? description.slice(0,20)+'...' : description} />
+                    <CustomText size={vh(1.7)}  text={String(dateCreated).slice(0,10)} />
                 </View>
             </TouchableOpacity>
         </Animated.View>
@@ -82,7 +82,8 @@ const style = StyleSheet.create({
         borderRadius: theme.curves.full,
         minWidth:'50%',
         padding:1.5,
-        maxWidth:'70%'
+        maxWidth:'60%',
+        height:vh(2.7)
     }
 })
 
