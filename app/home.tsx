@@ -113,7 +113,16 @@ const home = () => {
         size={vh(1.8)}
         name="search"
       />
-    }
+    },
+    {
+      route: '/articles',
+      name: 'Articles',
+      icon: ()=>  <FontAwesome5
+          color={theme.gray.gray2}
+          size={vh(1.8)}
+          name="book-open"
+        />
+      }
       ]
 
   return (

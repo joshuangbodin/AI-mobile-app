@@ -17,6 +17,8 @@ const expenseCategories =[
     'Others'
 ]
 
+
+
 export const categories = {
     income: incomeCategories,
     expense: expenseCategories
