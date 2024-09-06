@@ -74,10 +74,10 @@ const Bar = ({name , percentage , showNumber=false}:BarProps)=>{
         </View>}
         <View>
             <LinearGradient
-            colors={[theme.primary.normal , theme.primary.purple]}
+            colors={[theme.primary.purple,theme.primary.purple,theme.primary.normal , theme.primary.deepblue]}
             style={[style.bar ,{ height:getValueByPercentage(percentage)}]}
-            start={{x:-1 , y:-1}}
-            end={{x:1 , y:1}}
+            start={{ x: -1, y: 1 }}
+            end={{ x: 1, y: -1 }}
 >
             </LinearGradient>
         </View>

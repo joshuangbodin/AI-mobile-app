@@ -55,10 +55,12 @@ const style = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 10,
         alignItems: 'center',
-        backgroundColor: theme.primary.dark,
-        borderRadius:theme.curves.xl,
+        //backgroundColor: theme.primary.dark,
+        //borderRadius:theme.curves.xl,
         height: vh(12),
         gap:5,
+       
+
     },
 
     amount: {

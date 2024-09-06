@@ -35,8 +35,8 @@ const Style = StyleSheet.create({
     alignItems:'center',
   },
   image:{
-    width:vw(60),
-    height:vw(60),
+    width:vh(40),
+    height:vh(40),
     alignSelf:'center',
   },
 

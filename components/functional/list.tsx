@@ -94,7 +94,7 @@ const TransactionList = ({ data , isOpen ,showEnd=true, setIsOpen , setIsSelecte
         }
 
         contentContainerStyle={{
-          gap:8
+         
         }}
 
       style={{

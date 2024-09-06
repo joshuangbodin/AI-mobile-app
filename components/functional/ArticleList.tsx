@@ -61,8 +61,8 @@ const styles = StyleSheet.create({
     itemcont:{
         height:vh(15),
         justifyContent:'center',
-        borderTopWidth:2,
-        borderTopColor:theme.primary.dark
+        // borderTopWidth:2,
+        // borderTopColor:theme.primary.dark
 
     }
     ,

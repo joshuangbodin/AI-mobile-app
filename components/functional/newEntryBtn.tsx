@@ -268,17 +268,17 @@ const styles = StyleSheet.create({
     fontSize: vh(2.2),
     height: vh(8),
     color: theme.gray.gray4,
-    backgroundColor: theme.primary.alt,
+   
   },
   View:{
     paddingHorizontal:10,
-    backgroundColor: theme.primary.alt,
+    backgroundColor: theme.primary.deep,
     borderRadius: theme.curves.md,
   },
 
   type: {
     flexDirection: "row",
-    backgroundColor: theme.primary.alt,
+    backgroundColor: theme.primary.deep,
     height: vh(3),
     borderRadius: theme.curves.md,
     justifyContent: "center",
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
   },
   //list
   categotyCard: {
-    backgroundColor: theme.primary.alt,
+    backgroundColor: theme.primary.deep,
     height: vh(4.3),
     justifyContent: "center",
     alignItems: "center",
