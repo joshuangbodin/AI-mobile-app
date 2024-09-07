@@ -127,8 +127,8 @@ const register = () => {
                         <Switch
                             value={formInput.appLock}
                             onValueChange={() => setFormInput({ ...formInput, appLock: !formInput.appLock })}
-                            trackColor={{ true: theme.primary.normal, false: theme.gray.gray2 }}
-                            thumbColor={'white'}
+                            trackColor={{ true: theme.primary.purple, false: theme.gray.gray2 }}
+                            thumbColor={theme.primary.purple}
                         />
                     </View>
 
@@ -136,7 +136,7 @@ const register = () => {
 
 
                 {/* submit btn */}
-                {loading ? <ActivityIndicator color={theme.primary.normal} /> : <CustomButton style={{ alignSelf: 'center' }} onPress={register} title='Register' />}
+                {loading ? <ActivityIndicator color={theme.primary.purple} /> : <CustomButton style={{ alignSelf: 'center' }} onPress={register} title='Register' />}
             </ScrollView>
         </ScreenWrapper>
     )

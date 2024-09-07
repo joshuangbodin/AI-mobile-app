@@ -6,6 +6,7 @@ const _layout = () => {
   
   return (
     <Stack
+    initialRouteName="splash"
       screenOptions={{
         headerShown: false,
       }}

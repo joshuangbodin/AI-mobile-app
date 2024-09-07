@@ -1,30 +1,50 @@
 import { View,  Image , StyleSheet} from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import ScreenWrapper from '@/components/ScreenWrapper'
-import { theme } from '@/constants/theme'
-import { vh, vw } from '@/helpers/responsivesizes'
-import CustomText from '@/components/typography/text'
-import CustomButton from '@/components/ui/button'
+//import { theme } from '@/constants/theme'
+import { vh } from '@/helpers/responsivesizes'
+import { retrieveUserData } from '@/appStorage/user/user'
 import { router } from 'expo-router'
+import Animated, { BounceIn, FadeIn, FadeOut } from 'react-native-reanimated'
+import CustomText from '@/components/typography/text'
+import { theme } from '@/constants/theme'
+
 
 const index = () => {
+
+  useEffect(()=>{
+    setTimeout(checkIfUserExists , 5000)
+  },[])
+
+
+  const checkIfUserExists = async () => {
+   
+
+    const data = await retrieveUserData()
+
+    if (data.success) {
+        if (data.data.appLock) {
+            
+            router.push('/login')
+            return;
+        }
+
+        
+        router.push('/home')
+        return;
+
+    }
+    else {
+        router.push('/splash')
+    }
+
+}
+
   return (
     <ScreenWrapper SafeArea={false} Style={Style.container}>
-      {/* splash image */}
-      <Image style={Style.image} source={require('../assets/images/splashimg.png')}/>
-
-
-      {/* logo & motto */}
-      <View>
-        <CustomText isCentered isheader text='Budget Boy.'/>
-        <CustomText isCentered size={vh(1.8)} isSupporting text='track your expenses seamlessly.'/>
-        <CustomText isCentered size={vh(1.8)} isSupporting text='take notes of income vs expenditure.'/>
-      </View>
-
-
-
-      {/* call to action button */}
-      <CustomButton title = {'Continue' } onPress={()=>{router.push('/register')}}/>
+     <View style={{gap:30}}><Animated.Image entering={BounceIn}  exiting={FadeOut} style={Style.image} source={require('../assets/images/logo.png')}/>
+     
+     </View>
     </ScreenWrapper>
   )
 }
@@ -35,49 +55,12 @@ const Style = StyleSheet.create({
     alignItems:'center',
   },
   image:{
-    width:vh(40),
-    height:vh(40),
+    width:vh(12),
+    height:vh(15),
     alignSelf:'center',
   },
 
-  //text info
-  textarea:{
-    justifyContent:'center',
-    alignItems:'center'
-  },
-  textHead:{
-    color: theme.gray.white,
-    fontSize: vh(4),
-    textAlign:'center',
-    fontWeight: '600',
-    textTransform:'capitalize'
-
-  },
-  textbottom:{
-    color:theme.gray.gray2,
-    textAlign:'center',
-    padding:20,
-    paddingHorizontal: 40,
-    fontSize:vh(1.8),
-  },
-
-  //button
-  btn:{
-    width:vw(95),
-    height: vh(8),
-    backgroundColor:'rgba(225,225,225,.4)',
-    borderRadius:theme.curves.xl,
-    borderCurve:'continuous',
-    justifyContent:'center',
-    alignItems:'center'
-  },
-
-  btntext:{
-    color: theme.gray.white,
-    fontSize:vh(2.7),
-    fontWeight:'500'
-
-  }
+  
 })
 
 export default index

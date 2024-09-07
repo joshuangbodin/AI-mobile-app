@@ -67,8 +67,8 @@ const Bar = ({name , percentage , showNumber=false}:BarProps)=>{
     }
     return (
         <View style={style.barCont}>
-        {<View style={{backgroundColor:theme.primary.normal , padding:5 , borderRadius:theme.curves.full, width:vw(11) , justifyContent:'center' , alignItems:'center'}}>
-            <CustomText size={vh(1.6)}>
+        {<View style={{}}>
+            <CustomText size={vh(1.4)}>
                 {percentage.toFixed(0)}%
             </CustomText>
         </View>}
@@ -81,7 +81,7 @@ const Bar = ({name , percentage , showNumber=false}:BarProps)=>{
 >
             </LinearGradient>
         </View>
-        <CustomText isSupporting>{name}</CustomText>
+        <CustomText size={vh(1.5)} isSupporting>{name}</CustomText>
       </View>
     )
 }
@@ -106,7 +106,7 @@ const style = StyleSheet.create({
         gap:10,
     },
     bar:{
-        width:vw(11),
+        width:vw(5),
         borderRadius: theme.curves.full,
 
     }

@@ -1,56 +1,65 @@
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
-import React from 'react'
-import ScreenWrapper from '@/components/ScreenWrapper'
-import GoBackBtn from '@/components/ui/GoBackBtn'
-import CustomText from '@/components/typography/text'
-import { Feather } from '@expo/vector-icons'
-import { vh } from '@/helpers/responsivesizes'
-import { theme } from '@/constants/theme'
-import { deleteUserInfo } from '@/appStorage/user/user'
-import { router } from 'expo-router'
+import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
+import React from "react";
+import ScreenWrapper from "@/components/ScreenWrapper";
+import GoBackBtn from "@/components/ui/GoBackBtn";
+import CustomText from "@/components/typography/text";
+import { Feather, FontAwesome6 } from "@expo/vector-icons";
+import { vh } from "@/helpers/responsivesizes";
+import { theme } from "@/constants/theme";
+import { deleteUserInfo } from "@/appStorage/user/user";
+import { router } from "expo-router";
 
 const settings = () => {
   return (
-   <ScreenWrapper SafeArea>
+    <ScreenWrapper SafeArea>
       {/* Top */}
-      <GoBackBtn/>
+      <GoBackBtn />
 
       {/* List */}
       <ScrollView>
-        <SettingItem name='Delete All Info' onPress={async ()=> {await deleteUserInfo()
-          router.push('/')
-          return
-        } } icon={'trash'}/>
+        <SettingItem
+          name="Delete All Info"
+          onPress={async () => {
+            await deleteUserInfo();
+            router.push("/");
+            return;
+          }}
+          icon={() => (
+            <FontAwesome6 name="trash-alt" size={vh(3)} color="red" />
+          )}
+        />
       </ScrollView>
-   </ScreenWrapper>
-  )
+    </ScreenWrapper>
+  );
+};
+
+export default settings;
+
+interface SetProps {
+  name: string;
+  icon: () => React.ReactNode;
+  onPress?: () => void;
 }
 
-export default settings
+const SettingItem = ({ name, icon, onPress }: SetProps) => {
+  return (
+    <View>
+      <TouchableOpacity style={style.settingsCont} onPress={onPress}>
+        <CustomText isheader size={vh(2.3)}>
+          {name}
+        </CustomText>
+        {icon()}
+      </TouchableOpacity>
+    </View>
+  );
+};
 
-
-
-
-
-
-
-
-interface SetProps{
-  name:string;
-  icon?:any;
-  onPress?: ()=> void;
-}
-
-
-
-
-const SettingItem = ({name ,icon ,onPress}:SetProps) =>{
-return(
-  <TouchableOpacity onPress={onPress}>
-    <CustomText isheader size={vh(2.3)}>
-      {name}
-    </CustomText>
-    <Feather size={vh(2)} color={theme.gray.white} name={icon}/>
-  </TouchableOpacity>
-) 
-}
+const style = StyleSheet.create({
+  settingsCont: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 10,
+    marginVertical: 5,
+  },
+});
