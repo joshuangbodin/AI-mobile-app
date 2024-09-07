@@ -17,9 +17,9 @@ const index = () => {
       {/* logo & motto */}
       <View style={{gap:5 , justifyContent:'center',alignItems:'center'}}>
         <Image style={{width:vh(8) , height:vh(8),marginBottom:10}} source={require('../assets/images/logo.png')}/>
-        <CustomText isCentered isheader size={vh(2.2)} text='FinTrack.'/>
-        <CustomText isCentered size={vh(1.7)} isSupporting text='track your expenses seamlessly.'/>
-        {/* <CustomText isCentered size={vh(1.4)} isSupporting text='take notes of income vs expenditure.'/> */}
+        <CustomText isCentered isheader size={vh(2.2)} text='FineTrack.'/>
+        <CustomText isCentered size={vh(1.7)} style={{color:theme.gray.gray3}} text='track your expenses seamlessly.'/>
+        <CustomText isCentered size={vh(1.2)} style={{color:theme.gray.gray3}} text='take notes of income vs expenditure.'/>
       </View>
 
 

@@ -21,7 +21,7 @@ const CategoryList = ({active , setActive}:props) => {
     data={['All',...categories.expense , ...categories.income]}
     horizontal
     renderItem={({item,index})=>(
-        <CateGoryCard index={index+1} onPress={()=>setActive(item)} color={active == item ? randomCategoryColorGenerator(item): theme.primary.dark} name={String(item)}/>
+        <CateGoryCard key={index} index={index+1} onPress={()=>setActive(item)} color={active == item ? randomCategoryColorGenerator(item): theme.primary.dark} name={String(item)}/>
     )}
     >
 

@@ -42,7 +42,7 @@ interface articleProps{
 
 const ArticleItem = ({name ,Key,rating ,onPress, brief}:articleProps) =>{
     return(
-        <Animated.View entering={FadeInDown.duration(200*Key)} style={styles.itemcont}>
+        <Animated.View key={Key} entering={FadeInDown.duration(200*Key)} style={styles.itemcont}>
             <TouchableOpacity onPress={onPress} style={styles.itempress}>
                 <CustomText isheader size={vh(2.3)}>{name}</CustomText>
                 <CustomText isSupporting style={{fontWeight:400}} size={vh(1.8)}>{brief.slice(0,70)+'...'}</CustomText>

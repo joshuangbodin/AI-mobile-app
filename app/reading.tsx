@@ -103,13 +103,13 @@ const reading = () => {
                 horizontal
                 data={article.relatedTopics}
                 contentContainerStyle={{ gap: 5 }}
-                renderItem={({ item }) => (
-                  <CustomText style={styles.cate} size={vh(1.4)} text={item} />
+                renderItem={({ item , index }) => (
+                  <CustomText key={index} style={styles.cate} size={vh(1.4)} text={item} />
                 )}
               />
             </View>
 
-            <View style={{ marginTop: 10 }}>
+            <View style={{ marginTop : 10 }}>
               <CustomText size={vh(1.7)}>{article.article
               }</CustomText>
             </View>

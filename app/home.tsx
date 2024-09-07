@@ -1,23 +1,37 @@
-import { View, StyleSheet, TouchableOpacity, ScrollView, Image, FlatList } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+  FlatList,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import CustomText from "@/components/typography/text";
 import { transaction, transactionList, user } from "@/types/app.t";
 import { retrieveUserData } from "@/appStorage/user/user";
 import { vh, vw } from "@/helpers/responsivesizes";
-import { Feather, FontAwesome5, FontAwesome6, MaterialIcons } from "@expo/vector-icons";
+import {
+  Feather,
+  FontAwesome5,
+  FontAwesome6,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import { theme } from "@/constants/theme";
 import ExpenseBoard from "@/components/functional/expenseBoard";
 import TransactionList from "@/components/functional/list";
 import NewEntryBtn from "@/components/functional/newEntryBtn";
-import { deleteFromList, getListFromStorage } from "@/appStorage/transactions/transactions";
+import {
+  deleteFromList,
+  getListFromStorage,
+} from "@/appStorage/transactions/transactions";
 import { getExpenseSummary } from "@/appStorage/transactions/Calculations";
 import CustomModal from "@/components/modal/CustomModal";
 import { formatCurrency } from "@/helpers/pricecustomization";
 import { randomCategoryColorGenerator } from "@/helpers/RandomGenerator";
 import { router } from "expo-router";
 import Animated, { FadeInRight } from "react-native-reanimated";
-
 
 const home = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -26,8 +40,6 @@ const home = () => {
   const [transactionList, setTransationList] = useState<transactionList>();
   const [track, setTrack] = useState<number>(0);
   const [selectedTransaction, setSelectedTransaction] = useState<transaction>();
-  
-
 
   // expenseSummary
   const [expenseSummary, setExpenseSummary] = useState({
@@ -41,7 +53,7 @@ const home = () => {
     initializeUserInfo();
     initializeList();
     initializeExpenseSummary();
-  }, [isOpen, track , isVisible]);
+  }, [isOpen, track, isVisible]);
 
   const initializeUserInfo = async () => {
     const data = await retrieveUserData();
@@ -77,16 +89,16 @@ const home = () => {
     setTrack(track + 1);
   };
 
-  const deleteHandler = async() => {
-    if(!selectedTransaction){
-      return
+  const deleteHandler = async () => {
+    if (!selectedTransaction) {
+      return;
     }
     await deleteFromList(selectedTransaction);
     setSelectedTransaction(undefined);
     setIsVisible(false);
 
-    return
-  }
+    return;
+  };
 
   const isSelected = (index: number) => {
     setIsVisible(true);
@@ -97,43 +109,48 @@ const home = () => {
 
   const Action = [
     {
-    route: '/analytics',
-    name: 'Analytics',
-    icon: ()=>  <FontAwesome6
-        color={theme.gray.gray2}
-        size={vh(1.8)}
-        name="money-bill-trend-up"
-      />
-    },
-     {
-    route: '/search',
-    name: 'Search',
-    icon: ()=>  <FontAwesome5
-        color={theme.gray.gray2}
-        size={vh(1.8)}
-        name="search"
-      />
+      route: "/analytics",
+      name: "Analytics",
+      icon: () => (
+        <FontAwesome6
+          color={theme.gray.gray2}
+          size={vh(1.8)}
+          name="money-bill-trend-up"
+        />
+      ),
     },
     {
-      route: '/articles',
-      name: 'Articles',
-      icon: ()=>  <FontAwesome5
+      route: "/search",
+      name: "Search",
+      icon: () => (
+        <FontAwesome5 color={theme.gray.gray2} size={vh(1.8)} name="search" />
+      ),
+    },
+    {
+      route: "/articles",
+      name: "Articles",
+      icon: () => (
+        <FontAwesome5
           color={theme.gray.gray2}
           size={vh(1.8)}
           name="book-open"
         />
-      }
-      ]
+      ),
+    },
+  ];
 
   return (
     <ScreenWrapper SafeArea={true} Style={style.container}>
-      
       {/* top */}
       <View style={style.top}>
         <View>
-          <CustomText size={vh(1.6)} isSupporting>Hello!</CustomText>
+          <CustomText size={vh(1.6)} isSupporting>
+            Hello!
+          </CustomText>
           {userInfo ? (
-            <CustomText isheader style={style.name}>{userInfo.name}</CustomText>
+            <CustomText isheader style={style.name}>
+              {userInfo.name}
+            </CustomText>
           ) : (
             <CustomText isheader style={style.name} text={"user"} />
           )}
@@ -141,7 +158,7 @@ const home = () => {
 
         {/* setting */}
 
-        <TouchableOpacity onPress={()=>router.push('/settings')}>
+        <TouchableOpacity onPress={() => router.push("/settings")}>
           <FontAwesome6
             name="bars-staggered"
             size={vh(3.4)}
@@ -160,30 +177,35 @@ const home = () => {
         />
       </View>
 
-          
-
-     
-      <View style={{justifyContent:'center' , height:vh(10)}}>
+      <View style={{ justifyContent: "center", height: vh(10) }}>
         <FlatList
-        data={Action}
-        horizontal
-        
-        contentContainerStyle={{ justifyContent:'center' , alignItems:'center' , gap:10,
-          paddingLeft:10
-        }}
-        renderItem={({item , index})=>(
-          <Animated.View entering={FadeInRight.duration(200 * (index+1))}>
-              <TouchableOpacity onPress={()=>router.push(item.route)} style={style.actionbtn}>
-            {item.icon()}
-            <CustomText>{item.name} </CustomText>
-            <Feather
-              color={theme.gray.white}
-              size={vh(1.8)}
-              name="chevron-right"
-            />
-          </TouchableOpacity>
-          </Animated.View>
-        )}
+          data={Action}
+          horizontal
+          contentContainerStyle={{
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 10,
+            paddingLeft: 10,
+          }}
+          renderItem={({ item, index }) => (
+            <Animated.View
+              key={index}
+              entering={FadeInRight.duration(200 * (index + 1))}
+            >
+              <TouchableOpacity
+                onPress={() => router.push(item.route)}
+                style={style.actionbtn}
+              >
+                {item.icon()}
+                <CustomText>{item.name} </CustomText>
+                <Feather
+                  color={theme.gray.white}
+                  size={vh(1.8)}
+                  name="chevron-right"
+                />
+              </TouchableOpacity>
+            </Animated.View>
+          )}
         />
       </View>
 
@@ -192,8 +214,9 @@ const home = () => {
           isSupporting
           size={vh(1.7)}
           style={{ paddingTop: 5, paddingBottom: 10 }}
-
-        >All Transactions</CustomText>
+        >
+          All Transactions
+        </CustomText>
         <TransactionList
           isOpen={track}
           setIsSelected={isSelected}
@@ -224,52 +247,74 @@ const home = () => {
             {/* name , amount , date */}
             <View style={style.modalTopView}>
               <View style={style.modalName}>
-                <CustomText size={vh(3)} isheader>{selectedTransaction.name}</CustomText>
+                <CustomText size={vh(3)} isheader>
+                  {selectedTransaction.name}
+                </CustomText>
                 <CustomText size={vh(1.4)} isSupporting>
-                  {String(selectedTransaction.dateCreated).slice(0,10)+"  "+String(selectedTransaction.dateCreated).slice(11,16)}
+                  {String(selectedTransaction.dateCreated).slice(0, 10) +
+                    "  " +
+                    String(selectedTransaction.dateCreated).slice(11, 16)}
                 </CustomText>
               </View>
-              <CustomText isheader size={vh(2.7)}>{formatCurrency(Number(selectedTransaction.amount) , true)}</CustomText>
+              <CustomText isheader size={vh(2.7)}>
+                {formatCurrency(Number(selectedTransaction.amount), true)}
+              </CustomText>
             </View>
 
             {/* category and type */}
             <View style={style.cateCont}>
-              <View style={[style.cateBtn , {backgroundColor: randomCategoryColorGenerator(selectedTransaction.category)}]}>
-                <CustomText size={vh(1.7)}>{selectedTransaction.category}</CustomText>
+              <View
+                style={[
+                  style.cateBtn,
+                  {
+                    backgroundColor: randomCategoryColorGenerator(
+                      selectedTransaction.category
+                    ),
+                  },
+                ]}
+              >
+                <CustomText size={vh(1.7)}>
+                  {selectedTransaction.category}
+                </CustomText>
               </View>
               <View style={style.cateBtn}>
-                <CustomText  size={vh(1.7)}>{selectedTransaction.type}</CustomText>
+                <CustomText size={vh(1.7)}>
+                  {selectedTransaction.type}
+                </CustomText>
               </View>
             </View>
 
             {/* description */}
-            <CustomText size={vh(1.6)} isSupporting>description:</CustomText>
+            <CustomText size={vh(1.6)} isSupporting>
+              description:
+            </CustomText>
             <View style={style.desc}>
-              <CustomText  >{selectedTransaction.description}</CustomText>
+              <CustomText>{selectedTransaction.description}</CustomText>
             </View>
 
             {/* buttons */}
             <View style={style.btnContainer}>
-              
               <TouchableOpacity onPress={deleteHandler} style={style.btn}>
-                <FontAwesome6 name='trash-alt' color={'red'} size={vh(2.4)}/>
+                <FontAwesome6 name="trash-alt" color={"red"} size={vh(2.4)} />
               </TouchableOpacity>
             </View>
           </ScrollView>
         ) : (
-          <View style={{
-            flex:1,
-            justifyContent:'center',
-            alignItems:'center',
-            minHeight: 300,
-          }}>
-            <Image 
-            
+          <View
             style={{
-              width: vw(30),
-              height: vw(30)
-            }} 
-            source={require('../assets/images/empty.png')}/>
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              minHeight: 300,
+            }}
+          >
+            <Image
+              style={{
+                width: vw(30),
+                height: vw(30),
+              }}
+              source={require("../assets/images/empty.png")}
+            />
             <CustomText isSupporting>No Transaction Selected</CustomText>
           </View>
         )}
@@ -320,7 +365,7 @@ const style = StyleSheet.create({
   actionbtn: {
     minWidth: vw(40),
     maxWidth: 250,
-    height:vh(6),
+    height: vh(6),
     justifyContent: "space-around",
     backgroundColor: theme.primary.dark,
     borderRadius: theme.curves.lg,
@@ -339,54 +384,54 @@ const style = StyleSheet.create({
 
   // modal
 
-  modalTopView:{
-    flexDirection:'row',
-    justifyContent:'space-between',
-    alignItems:'center',
+  modalTopView: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 
-  modalName:{
-    width:'50%',
-    gap:5
+  modalName: {
+    width: "50%",
+    gap: 5,
   },
 
-  cateCont:{
-    flexDirection:'row',
-    gap:5,
-    marginBottom:30,
+  cateCont: {
+    flexDirection: "row",
+    gap: 5,
+    marginBottom: 30,
   },
 
-  cateBtn:{
+  cateBtn: {
     backgroundColor: theme.primary.dark,
-    padding:3,
-    justifyContent:'center',
-    alignItems:'center',
-    paddingHorizontal:20,
-    borderRadius: theme.curves.sm
+    padding: 3,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    borderRadius: theme.curves.sm,
   },
 
-  desc:{
-    backgroundColor:theme.primary.dark,
-    padding:10,
-    height:vh(20),
-    borderRadius: theme.curves.lg
+  desc: {
+    backgroundColor: theme.primary.dark,
+    padding: 10,
+    height: vh(20),
+    borderRadius: theme.curves.lg,
   },
 
-  btnContainer:{
-    flexDirection:'row',
-    gap:5,
-    justifyContent:'flex-end',
-    alignItems:'center'
+  btnContainer: {
+    flexDirection: "row",
+    gap: 5,
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
 
-  btn:{
+  btn: {
     width: vw(20),
-    height:vh(5),
+    height: vh(5),
     backgroundColor: theme.primary.dark,
-    justifyContent:'center',
-    alignItems:'center',
-    borderRadius: theme.curves.md
-  }
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: theme.curves.md,
+  },
 });
 
 export default home;

@@ -5,6 +5,7 @@ import { vh, vw } from '@/helpers/responsivesizes'
 import { transactionList } from '@/types/app.t'
 import ListItem from './listItem'
 import { deleteFromList } from '@/appStorage/transactions/transactions'
+import Empty from './Empty'
 
 
 interface props {
@@ -27,21 +28,7 @@ const TransactionList = ({ data , isOpen ,showEnd=true, setIsOpen , setIsSelecte
         }
 
         ListEmptyComponent={
-          <View style={{
-            flex:1,
-            justifyContent:'center',
-            alignItems:'center',
-            minHeight: 300,
-          }}>
-            <Image 
-            
-            style={{
-              width: vw(30),
-              height: vw(30)
-            }} 
-            source={require('../../assets/images/empty.png')}/>
-            <CustomText isSupporting>Empty! Empty! Empty!</CustomText>
-          </View>}
+          <Empty/>}
 
 
         style={{
@@ -58,6 +45,7 @@ const TransactionList = ({ data , isOpen ,showEnd=true, setIsOpen , setIsSelecte
       renderItem={
         ({ item , index }) =>
           <ListItem
+          key={index}
             name={item.name}
             index={index}
             description={item.description}
@@ -74,23 +62,9 @@ const TransactionList = ({ data , isOpen ,showEnd=true, setIsOpen , setIsSelecte
             
           />
       }
-      ListFooterComponent={showEnd?<CustomText size={vh(1.4)} isSupporting isCentered style={{paddingVertical:30}}>End Of List</CustomText>:<></>}
+      ListFooterComponent={showEnd?data.list.length == 0 ?<></>:<CustomText size={vh(1.1)} isSupporting isCentered style={{paddingVertical:30}}>End Of List</CustomText>:<></>}
       ListEmptyComponent={
-        <View style={{
-          flex:1,
-          justifyContent:'center',
-          alignItems:'center',
-          minHeight: 300,
-        }}>
-          <Image 
-          
-          style={{
-            width: vw(30),
-            height: vw(30)
-          }} 
-          source={require('../../assets/images/empty.png')}/>
-           <CustomText isSupporting>Empty! Empty! Empty!</CustomText>
-        </View>
+        <Empty/>
         }
 
         contentContainerStyle={{
