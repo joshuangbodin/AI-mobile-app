@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import CustomText from "@/components/typography/text";
 import GoBackBtn from "@/components/ui/GoBackBtn";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { financialArticles } from "@/constants/articles";
 import articles from "./articles";
 import Ratings from "@/components/functional/Ratings";
@@ -13,6 +13,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { FlatList } from "react-native";
 import Empty from "@/components/functional/Empty";
 import { AntDesign, FontAwesome6, MaterialIcons } from "@expo/vector-icons";
+import FieldList from "@/components/functional/fieldList";
+import CustomButton from "@/components/ui/button";
 
 interface article {
   name: string;
@@ -79,12 +81,35 @@ const reading = () => {
             contentContainerStyle={styles.main}
             showsHorizontalScrollIndicator={false}
           >
-            <CustomText isheader size={vh(2.7)} text={article.name} />
             <View>
-              <FlatList horizontal data={article.relatedTopics} renderItem={({item})=>(
-                <View></View>
-              )}/>
+              <CustomText isheader size={vh(2.7)} text={article.name} />
+              <View style={styles.categoryList}>
+                <FlatList
+                  horizontal
+                  contentContainerStyle={{ alignItems: "center", gap: 5 }}
+                  data={article.relatedTopics}
+                  renderItem={({ item, index }) => (
+                    <View key={index} style={styles.cateCont}>
+                      <CustomText size={vh(1.7)} text={item} />
+                    </View>
+                  )}
+                />
+              </View>
             </View>
+
+            <View>
+              <CustomText size={vh(1.8)} capitalize={false}>
+                {article.article}
+              </CustomText>
+            </View>
+
+            <FieldList name="Importance" data={article.importance}/>
+            <FieldList name="Key Points" data={article.keyPoints}/>
+            <FieldList name="Tips" data={article.actionableTips}/>
+
+
+            <CustomButton onPress={()=>router.push('/articles')}  isFullWidth={false} title="Finished" textstyle={{fontSize: vh(2)}} style={{marginTop:30 , height: vh(6)}}/>
+
           </ScrollView>
         </View>
       </ScreenWrapper>
@@ -146,5 +171,21 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     paddingTop: 10,
+    gap:15,
   },
+
+  categoryList: {
+    height: vh(10),
+    justifyContent: "center",
+  },
+  cateCont: {
+    height: vh(5),
+    backgroundColor: theme.primary.dark,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    borderRadius: theme.curves.lg,
+  },
+
+  
 });

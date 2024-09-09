@@ -40,7 +40,7 @@ const articles = () => {
   return (
     <ScreenWrapper Style={{ paddingHorizontal: 10 }} SafeArea>
       <View style={style.top}>
-        <GoBackBtn />
+        <GoBackBtn route="/home"/>
         <CustomText size={vh(2.3)} isheader text="Articles" />
       </View>
 

@@ -15,7 +15,7 @@ interface props {
     children?: React.ReactNode;
     size?:number;
     autosize? : boolean;
-    
+    capitalize?: boolean;
 }
 
 
@@ -28,7 +28,7 @@ const CustomText = ({
     children,
     size,
     autosize = false,
-    
+    capitalize = true,
 }
     : props) => {
 
@@ -56,7 +56,8 @@ const CustomText = ({
                     isCentered && { textAlign: 'center' },
                     style,
                     size&&{fontSize:size},
-                    {fontFamily:'Inter'}
+                    {fontFamily:'Inter'},
+                    capitalize&&{textTransform:'capitalize'}
                 ]}
             >
                 {children}
@@ -73,7 +74,8 @@ const CustomText = ({
                 isCentered && { textAlign: 'center' },
                 style,
                 size&&{fontSize:size},
-                {fontFamily:'Inter'}
+                {fontFamily:'Inter'},
+                capitalize&&{textTransform:'capitalize'}
             ]}
             >
                 {text}
@@ -90,7 +92,8 @@ const CustomText = ({
                 isCentered && { textAlign: 'center' },
                 style,
                 size&&{fontSize:size},
-                {fontFamily:'Inter'}
+                {fontFamily:'Inter'},
+                capitalize&&{textTransform:'capitalize'}
             ]}
         >
             {text}
@@ -102,19 +105,19 @@ const styles = StyleSheet.create({
     text: {
         fontSize: vh(2),
         color: theme.gray.white,
-        textTransform:'capitalize'
+        
     },
     headertext: {
         fontSize: vh(3.5),
         color: theme.gray.white,
         fontWeight: 'bold',
-        textTransform:'capitalize'
+        
     },
     supporting: {
         fontSize: vh(1.8),
         color: theme.gray.gray2,
         fontWeight: '600',
-        textTransform:'capitalize'
+        
     },
 
 })
