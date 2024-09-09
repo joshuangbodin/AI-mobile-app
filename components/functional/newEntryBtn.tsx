@@ -240,8 +240,8 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   btn: {
-    width: vw(15),
-    height: vw(15),
+    width: vh(8),
+    height: vh(8),
     borderRadius: theme.curves.full,
     justifyContent: "center",
     alignItems: "center",

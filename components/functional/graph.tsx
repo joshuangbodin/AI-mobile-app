@@ -93,7 +93,6 @@ const style = StyleSheet.create({
         width: vw(93),
         height: vh(34),
         alignItems:'flex-end',
-        backgroundColor:theme.primary.dark,
         paddingVertical:10,
         borderRadius: theme.curves.xl,
         alignSelf:'center',

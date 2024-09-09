@@ -39,7 +39,7 @@ const ListItem = ({ name, description, amount, type, category, dateCreated,index
                 </View>
                 {/* other info */}
                 <View style={{width:'50%' , justifyContent:'space-around',height:'100%'}}>
-                    <CustomText style={{fontWeight:'700'}} text={name} />
+                    <CustomText style={{fontWeight:'700'}} text={name.length>15? name.slice(0,15)+'...': name} />
                     <CustomText size={vh(1.7)} style={{color:theme.gray.gray3}} text={description.length>20? description.slice(0,20)+'...' : description} />
                     <CustomText size={vh(1.7)}  text={String(dateCreated).slice(0,10)} />
                 </View>
@@ -82,10 +82,10 @@ const style = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         borderRadius: theme.curves.full,
-        minWidth:'50%',
         padding:1.5,
-        maxWidth:'60%',
-        height:vh(2.7)
+        maxWidth:150,
+        height:vh(2.5),
+        width:'45%',
     }
 })
 

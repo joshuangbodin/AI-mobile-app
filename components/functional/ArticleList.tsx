@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { FlatList } from 'react-native-gesture-handler'
+import { FlatList } from 'react-native'
 import CustomText from '../typography/text'
 import { vh } from '@/helpers/responsivesizes'
 import Ratings from './Ratings'

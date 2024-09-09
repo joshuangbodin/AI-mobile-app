@@ -41,7 +41,7 @@ const TransactionList = ({ data , isOpen ,showEnd=true, setIsOpen , setIsSelecte
   return (
     <FlatList
       data={data.list}
-
+      showsVerticalScrollIndicator={false}
       renderItem={
         ({ item , index }) =>
           <ListItem

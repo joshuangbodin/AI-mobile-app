@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { Feather, FontAwesome6, MaterialIcons } from '@expo/vector-icons';
+import { AntDesign, Feather, FontAwesome6, MaterialIcons } from '@expo/vector-icons';
 import { theme } from '@/constants/theme';
 import { vh } from '@/helpers/responsivesizes';
 
@@ -14,10 +14,10 @@ const returnStar = (num:number)=>{
   }
   var arr:any[] = []
   for(var i=0;i<num ; i++){
-    arr = [...arr, <MaterialIcons name='star' color={'yellow'} size={vh(1.8)}  />]
+    arr = [...arr, <AntDesign name='star' color={theme.primary.purple} size={vh(1.8)}  />]
   }
   for(var j = 0 ; j< (5-num) ; j++){
-    arr = [...arr, <MaterialIcons name='star' color={theme.gray.gray2} size={vh(1.8)}  />]
+    arr = [...arr, <AntDesign name='star' color={theme.gray.gray2} size={vh(1.8)}  />]
   }
   return arr
 }

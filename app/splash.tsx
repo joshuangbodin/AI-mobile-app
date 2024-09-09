@@ -9,17 +9,17 @@ import { router } from 'expo-router'
 
 const index = () => {
   return (
-    <ScreenWrapper SafeArea={false} Style={Style.container}>
+    <ScreenWrapper SafeArea={true} Style={Style.container}>
       {/* splash image */}
       <Image style={Style.image} source={require('../assets/images/splashimg.png')}/>
 
 
       {/* logo & motto */}
       <View style={{gap:5 , justifyContent:'center',alignItems:'center'}}>
-        <Image style={{width:vh(8) , height:vh(8),marginBottom:10}} source={require('../assets/images/logo.png')}/>
-        <CustomText isCentered isheader size={vh(2.2)} text='FineTrack.'/>
+        <Image style={{width:vh(8) , height:vh(9),marginBottom:10}} source={require('../assets/images/logo.png')}/>
+        <CustomText isCentered isheader size={vh(2.8)} text='FineTrack.'/>
         <CustomText isCentered size={vh(1.7)} style={{color:theme.gray.gray3}} text='track your expenses seamlessly.'/>
-        <CustomText isCentered size={vh(1.2)} style={{color:theme.gray.gray3}} text='take notes of income vs expenditure.'/>
+        <CustomText isCentered size={vh(1.4)} style={{color:theme.gray.gray3}} text='take notes of income vs expenditure.'/>
       </View>
 
 
@@ -36,8 +36,8 @@ const Style = StyleSheet.create({
     alignItems:'center',
   },
   image:{
-    width:vh(40),
-    height:vh(40),
+    width:vh(30),
+    height:vh(30),
     alignSelf:'center',
   },
 
