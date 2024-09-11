@@ -20,6 +20,7 @@ const GoBackBtn = ({ route }: props) => {
         router.back();
         return;
       }}
+      style={{paddingHorizontal:5}}
     >
       <Feather name="chevron-left" size={vh(4)} color={theme.gray.white} />
     </TouchableOpacity>

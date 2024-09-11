@@ -86,3 +86,17 @@ export const deleteUserInfo = async ()=>{
     await AsyncStorage.clear()
 }
 
+export const updateUserName = async (name:string) =>{
+    const {data , success} = await retrieveAuthUserData()
+
+    if(success){
+
+        const {success} = await storeUserData({...data , name})
+
+        return {success:true , data: 'Sucessful'};
+    }
+
+    else{
+        return {success:true , data: 'Encoutered an Error'};
+    }
+}

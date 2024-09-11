@@ -1,16 +1,20 @@
-import React from "react";
+import React, { Context, createContext, Dispatch, SetStateAction, useContext, useState } from "react";
 import { Stack } from "expo-router";
 
+export const Name =  createContext<string| any>('')
 
 const _layout = () => {
+  const [userName , setUserName] = useState(Name)
   
   return (
-    <Stack
-    initialRouteName="splash"
-      screenOptions={{
-        headerShown: false,
-      }}
-    ></Stack>
+    <Name.Provider value={[userName,setUserName]}>
+      <Stack
+      initialRouteName="splash"
+        screenOptions={{
+          headerShown: false,
+        }}
+      ></Stack>
+    </Name.Provider>
   );
 };
 

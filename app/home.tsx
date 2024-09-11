@@ -6,7 +6,7 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import CustomText from "@/components/typography/text";
 import { transaction, transactionList, user } from "@/types/app.t";
@@ -32,11 +32,13 @@ import { formatCurrency } from "@/helpers/pricecustomization";
 import { randomCategoryColorGenerator } from "@/helpers/RandomGenerator";
 import { router } from "expo-router";
 import Animated, { FadeInRight } from "react-native-reanimated";
+import { Name } from "./_layout";
 
 const home = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState<user>();
+  const [userName,setUserName] = useContext(Name);
   const [transactionList, setTransationList] = useState<transactionList>();
   const [track, setTrack] = useState<number>(0);
   const [selectedTransaction, setSelectedTransaction] = useState<transaction>();
@@ -55,13 +57,17 @@ const home = () => {
     initializeExpenseSummary();
   }, [isOpen, track, isVisible]);
 
+  
+
   const initializeUserInfo = async () => {
     const data = await retrieveUserData();
 
     if (data.success) {
       setUserInfo(data.data);
+      setUserName(data.data.name)
     }
   };
+  
 
   const initializeExpenseSummary = async () => {
     const data = await getExpenseSummary();
@@ -147,13 +153,13 @@ const home = () => {
           <CustomText size={vh(1.6)} isSupporting>
             Hello!
           </CustomText>
-          {userInfo ? (
+          {userName && typeof userName == 'string' ? 
             <CustomText isheader style={style.name}>
-              {userInfo.name}
+              {String(userName)}
             </CustomText>
-          ) : (
+           : 
             <CustomText isheader style={style.name} text={"user"} />
-          )}
+          }
         </View>
 
         {/* setting */}
