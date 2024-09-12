@@ -14,10 +14,10 @@ const returnStar = (num:number)=>{
   }
   var arr:any[] = []
   for(var i=0;i<num ; i++){
-    arr = [...arr, <AntDesign name='star' color={theme.primary.purple} size={vh(1.8)}  />]
+    arr = [...arr, <AntDesign key={i} name='star' color={theme.primary.purple} size={vh(1.8)}  />]
   }
   for(var j = 0 ; j< (5-num) ; j++){
-    arr = [...arr, <AntDesign name='star' color={theme.gray.gray2} size={vh(1.8)}  />]
+    arr = [...arr, <AntDesign key={j+5} name='star' color={theme.gray.gray2} size={vh(1.8)}  />]
   }
   return arr
 }

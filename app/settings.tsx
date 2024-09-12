@@ -1,6 +1,7 @@
 import {
+
   Image,
-  ImageBackground,
+
   ScrollView,
   StyleSheet,
   TextInput,
@@ -22,6 +23,7 @@ import CustomButton from "@/components/ui/button";
 import { showToast } from "@/components/toast/createToast";
 import Toast from "@/components/toast/toast";
 import { Name } from "./_layout";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
 const settings = () => {
   const [user, setUser] = useState<user>();
@@ -70,15 +72,15 @@ const settings = () => {
       <GoBackBtn />
 
       {/* List */}
-      <ScrollView>
+      <Animated.ScrollView entering={FadeIn}>
         {/* date */}
-        <View style={style.date}>
+        <Animated.View entering={FadeIn} style={style.date}>
           <CustomText isheader text={date} />
           <Image
             style={style.dateImg}
             source={require("../assets/images/grad.jpg")}
           />
-        </View>
+        </Animated.View>
 
         <CustomText
           style={{ marginTop: 30 }}
@@ -87,9 +89,9 @@ const settings = () => {
           text="User Info"
         />
         {editable ? (
-          <View style={style.inputView}>
+          <Animated.View entering={FadeIn} exiting={FadeOut} style={style.inputView}>
             <TextInput placeholder={'Name'} value={userName} onChangeText={setUserName} placeholderTextColor={theme.gray.gray2}  style={style.input}/>
-          </View>
+          </Animated.View >
         ) : (
           <SettingItem
             name="User Name"
@@ -169,7 +171,7 @@ const settings = () => {
             />
           )}
         />
-      </ScrollView>
+      </Animated.ScrollView>
     </ScreenWrapper>
   );
 };
@@ -223,13 +225,13 @@ const style = StyleSheet.create({
     zIndex: -60,
   },
   btn:{
-    height: vh(4),
+    height: vh(5),
    width:vw(90),
     marginTop:10,
     alignSelf:'center'
   },
   inputView:{
-    height:vh(4),
+    height:vh(5),
     backgroundColor: theme.primary.dark,
     marginTop:10,
     marginHorizontal:20,

@@ -17,7 +17,7 @@ const ArticleList = ({data}:props) => {
     <FlatList
     data={data}
     renderItem={({item , index}) =>(
-        <ArticleItem Key={index+1} key={Math.random()} rating={item.rating} onPress={()=> router.push({pathname:'/reading' , params:{name:item.name}})} brief={item.article} name={item.name}/>
+        <ArticleItem Key={index+1} key={item.name} rating={item.rating} onPress={()=> router.push({pathname:'/reading' , params:{name:item.name}})} brief={item.article} name={item.name}/>
     )}
     contentContainerStyle={{
         gap:10,
