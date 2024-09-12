@@ -1,7 +1,5 @@
 import {
-
   Image,
-
   ScrollView,
   StyleSheet,
   TextInput,
@@ -15,7 +13,11 @@ import CustomText from "@/components/typography/text";
 import { AntDesign, Feather, FontAwesome6 } from "@expo/vector-icons";
 import { vh, vw } from "@/helpers/responsivesizes";
 import { theme } from "@/constants/theme";
-import { deleteUserInfo, retrieveUserData, updateUserName } from "@/appStorage/user/user";
+import {
+  deleteUserInfo,
+  retrieveUserData,
+  updateUserName,
+} from "@/appStorage/user/user";
 import { router } from "expo-router";
 import { clearList } from "@/appStorage/transactions/transactions";
 import { user } from "@/types/app.t";
@@ -29,8 +31,8 @@ const settings = () => {
   const [user, setUser] = useState<user>();
   const [date, setDate] = useState<string>("");
   const [editable, setEditable] = useState<boolean>(false);
-  const [userName , setUserName] = useContext(Name)
-  const [msg , setMsg] = useState('');
+  const [userName, setUserName] = useContext(Name);
+  const [msg, setMsg] = useState("");
   const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
@@ -42,7 +44,7 @@ const settings = () => {
 
     if (data) {
       setUser(data);
-      setUserName(data.name)
+      setUserName(data.name);
     }
   };
 
@@ -57,7 +59,7 @@ const settings = () => {
 
   const getDateFormated = (hours: number, minutes: number) => {
     if (hours > 12) {
-      return `${hours - 12} : ${minutes > 9 ? minutes : "0" + minutes} PM`;
+      return `${hours - 12} : ${minutes==0? '00':minutes > 9 ? minutes : "0" + minutes} PM`;
     }
 
     return `${hours} : ${minutes > 9 ? minutes : "0" + minutes}AM`;
@@ -65,8 +67,7 @@ const settings = () => {
 
   return (
     <ScreenWrapper SafeArea>
-      {msg&&<Toast type={error? 'error' : 'success'} message={msg} />}
-
+      {msg && <Toast type={error ? "error" : "success"} message={msg} />}
 
       {/* Top */}
       <GoBackBtn />
@@ -89,9 +90,19 @@ const settings = () => {
           text="User Info"
         />
         {editable ? (
-          <Animated.View entering={FadeIn} exiting={FadeOut} style={style.inputView}>
-            <TextInput placeholder={'Name'} value={userName} onChangeText={setUserName} placeholderTextColor={theme.gray.gray2}  style={style.input}/>
-          </Animated.View >
+          <Animated.View
+            entering={FadeIn}
+            exiting={FadeOut}
+            style={style.inputView}
+          >
+            <TextInput
+              placeholder={"Name"}
+              value={userName}
+              onChangeText={setUserName}
+              placeholderTextColor={theme.gray.gray2}
+              style={style.input}
+            />
+          </Animated.View>
         ) : (
           <SettingItem
             name="User Name"
@@ -104,23 +115,22 @@ const settings = () => {
         {editable ? (
           <CustomButton
             title="Save"
-            onPress={async() => {
-              const{data} = await updateUserName(userName);
-              if (data){
-                showToast(data , setMsg)
-                setError(false)
-                initializeUser()
-              } 
-              else{
-                showToast(data , setMsg)
-                setError(true)
-                initializeUser()
+            onPress={async () => {
+              const { data } = await updateUserName(userName);
+              if (data) {
+                showToast(data, setMsg);
+                setError(false);
+                initializeUser();
+              } else {
+                showToast(data, setMsg);
+                setError(true);
+                initializeUser();
               }
-              setEditable(!editable)
+              setEditable(!editable);
             }}
             isFullWidth={false}
             style={style.btn}
-            textstyle={{fontSize:vh(1.8), fontWeight:'semibold'}}
+            textstyle={{ fontSize: vh(1.8), fontWeight: "semibold" }}
           />
         ) : (
           <SettingItem
@@ -224,26 +234,24 @@ const style = StyleSheet.create({
     position: "absolute",
     zIndex: -60,
   },
-  btn:{
+  btn: {
     height: vh(5),
-   width:vw(90),
-    marginTop:10,
-    alignSelf:'center'
+    width: vw(90),
+    marginTop: 10,
+    alignSelf: "center",
   },
-  inputView:{
-    height:vh(5),
+  inputView: {
+    height: vh(5),
     backgroundColor: theme.primary.dark,
-    marginTop:10,
-    marginHorizontal:20,
+    marginTop: 10,
+    marginHorizontal: 20,
     borderRadius: theme.curves.md,
-
-  }
-  ,input:{
-    flex:1,
+  },
+  input: {
+    flex: 1,
     color: theme.gray.gray2,
-    textTransform:'capitalize',
-    paddingLeft:20,
+    textTransform: "capitalize",
+    paddingLeft: 20,
     fontSize: vh(1.8),
-    
-  }
+  },
 });
