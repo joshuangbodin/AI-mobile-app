@@ -86,9 +86,9 @@ const home = () => {
     }
   };
 
-  const toggle = () => {
+  const toggle = async () => {
     setIsOpen(!isOpen);
-    initializeList();
+    await initializeList();
   };
 
   const increment = () => {
@@ -102,7 +102,7 @@ const home = () => {
     await deleteFromList(selectedTransaction);
     setSelectedTransaction(undefined);
     setIsVisible(false);
-
+    await initializeList();
     return;
   };
 
