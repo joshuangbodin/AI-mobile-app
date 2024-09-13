@@ -66,7 +66,7 @@ const reading = () => {
                 fontSize: vh(2),
               }}
             >
-              5
+              {article.rating}
             </Text>
             <AntDesign name="star" color={theme.primary.purple} size={vh(2)} />
           </View>
